@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GestionnaireWifiBot.MVVM.View
+namespace GestionnaireWifiBot.User_Controls
 {
     /// <summary>
-    /// Logique d'interaction pour ControleBoutonView.xaml
+    /// Logique d'interaction pour ControleVocaleView.xaml
     /// </summary>
-    public partial class ControleBoutonView : UserControl
+    public partial class ControleVocaleView : UserControl
     {
-        public ControleBoutonView()
+        public ControleVocaleView()
         {
             InitializeComponent();
         }

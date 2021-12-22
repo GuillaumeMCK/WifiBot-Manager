@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GestionnaireWifiBot.User_Controls
+namespace GestionnaireWifiBot.User_Controls.Base
 {
     /// <summary>
     /// Logique d'interaction pour Joystick.xaml

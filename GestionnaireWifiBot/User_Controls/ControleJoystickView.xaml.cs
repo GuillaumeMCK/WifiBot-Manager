@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GestionnaireWifiBot.MVVM.View
+namespace GestionnaireWifiBot.User_Controls
 {
     /// <summary>
-    /// Logique d'interaction pour ControleVocaleView.xaml
+    /// Logique d'interaction pour ControleJoystickView.xaml
     /// </summary>
-    public partial class ControleVocaleView : UserControl
+    public partial class ControleJoystickView : UserControl
     {
-        public ControleVocaleView()
+        public ControleJoystickView()
         {
             InitializeComponent();
         }

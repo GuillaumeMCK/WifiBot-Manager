@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:GestionnaireWifiBot.MVVM.ViewModel"
-        xmlns:views="clr-namespace:GestionnaireWifiBot.MVVM.View"
-        xmlns:uc="clr-namespace:GestionnaireWifiBot.User_Controls"
+        xmlns:controls_views="clr-namespace:GestionnaireWifiBot.User_Controls"
         mc:Ignorable="d"
         Title="Piloter le rover"
         Height="300" Width="300"
@@ -16,7 +15,7 @@
         ResizeMode="NoResize">
     <Window.Resources>
         <DataTemplate x:Name="PiloterRoverTemplate" DataType="{x:Type viewmodels:PiloterRoverViewModel}">
-            <views:ControleBoutonView DataContext="{Binding}"/>
+            <controls_views:ControleBoutonView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -75,21 +74,21 @@
             <Border Grid.Row="1" BorderBrush="#f0f0f0" Margin="10,10,10,10"
                     BorderThickness="2" CornerRadius="3"
                     Background="White">
-                    <Border Margin="6" Background="Transparent">
-                        <ContentControl  Content="{Binding}">
+                <Border Margin="6" Background="Transparent">
+                    <ContentControl  Content="{Binding}">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type viewmodels:ControleBoutonViewModel}">
-                                 <views:ControleBoutonView/>
+                                <controls_views:ControleBoutonView/>
                             </DataTemplate>
                             <DataTemplate DataType="{x:Type viewmodels:ControleJoystickViewModel}">
-                                <views:ControleJoystickView/>
+                                <controls_views:ControleJoystickView/>
                             </DataTemplate>
                             <DataTemplate DataType="{x:Type viewmodels:ControleVocaleViewModel}">
-                                <views:ControleVocaleView/>
+                                <controls_views:ControleVocaleView/>
                             </DataTemplate>
                         </ContentControl.Resources>
                     </ContentControl>
-                    </Border>
+                </Border>
             </Border>
         </Grid>
     </Grid>

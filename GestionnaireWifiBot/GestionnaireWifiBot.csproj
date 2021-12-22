@@ -66,13 +66,13 @@
     <Compile Include="MVVM\View\AddConfigView.xaml.cs">
       <DependentUpon>AddConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\ControleBoutonView.xaml.cs">
+    <Compile Include="User_Controls\ControleBoutonView.xaml.cs">
       <DependentUpon>ControleBoutonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\ControleJoystickView.xaml.cs">
+    <Compile Include="User_Controls\ControleJoystickView.xaml.cs">
       <DependentUpon>ControleJoystickView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\ControleVocaleView.xaml.cs">
+    <Compile Include="User_Controls\ControleVocaleView.xaml.cs">
       <DependentUpon>ControleVocaleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\PiloterRoverView.xaml.cs">
@@ -84,22 +84,22 @@
     <Compile Include="MVVM\View\DelConfigView.xaml.cs">
       <DependentUpon>DelConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User_Controls\Joystick.xaml.cs">
+    <Compile Include="User_Controls\Base\Joystick.xaml.cs">
       <DependentUpon>Joystick.xaml</DependentUpon>
     </Compile>
     <Page Include="MVVM\View\AddConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\ControleBoutonView.xaml">
+    <Page Include="User_Controls\ControleBoutonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\ControleJoystickView.xaml">
+    <Page Include="User_Controls\ControleJoystickView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\ControleVocaleView.xaml">
+    <Page Include="User_Controls\ControleVocaleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,7 +149,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User_Controls\Joystick.xaml">
+    <Page Include="User_Controls\Base\Joystick.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -188,20 +188,19 @@
     <Resource Include="Images\rover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\AddConf.png" />
-    <Resource Include="Images\DelConf.png" />
-    <Resource Include="Images\SelectConf.png" />
-    <Resource Include="Images\arrow_down.png" />
-    <Resource Include="Images\arrow_down_left.png" />
-    <Resource Include="Images\arrow_down_right.png" />
-    <Resource Include="Images\arrow_left.png" />
-    <Resource Include="Images\arrow_right.png" />
-    <Resource Include="Images\arrow_up.png" />
-    <Resource Include="Images\arrow_up_left.png" />
-    <Resource Include="Images\arrow_up_right.png" />
-    <Resource Include="Images\pad_stop_button.png" />
-    <Resource Include="Images\Micro.png" />
-    <Content Include="Images\validation.png" />
+    <Resource Include="Images\buttons\config_add.png" />
+    <Resource Include="Images\buttons\config_delete.png" />
+    <Resource Include="Images\buttons\config_select.png" />
+    <Resource Include="Images\buttons\pad_arrow_down.png" />
+    <Resource Include="Images\buttons\pad_arrow_down_left.png" />
+    <Resource Include="Images\buttons\pad_arrow_down_right.png" />
+    <Resource Include="Images\buttons\pad_arrow_left.png" />
+    <Resource Include="Images\buttons\pad_arrow_right.png" />
+    <Resource Include="Images\buttons\pad_arrow_up.png" />
+    <Resource Include="Images\buttons\pad_arrow_up_left.png" />
+    <Resource Include="Images\buttons\pad_arrow_up_right.png" />
+    <Resource Include="Images\buttons\pad_stop.png" />
+    <Resource Include="Images\micro.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

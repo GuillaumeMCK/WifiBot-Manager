@@ -38,7 +38,15 @@ namespace GestionnaireWifiBot.MVVM.ViewModel
         public ControleVocaleViewModel()
         {
             MoteurReconnaissance = new SpeechRecognitionEngine();   //Création d'un objet reconnaissance vocale
-            MoteurReconnaissance.SetInputToDefaultAudioDevice();    //Capture l'entrée audio par défaut
+            try
+            {
+                MoteurReconnaissance.SetInputToDefaultAudioDevice();    //Capture l'entrée audio par défaut
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
             //On construit le dictionnaire des mots à reconnaitre, ceux qui ne figurent pas dans cette liste ne seront pas reconnus
             MouvementChoisie = new Choices(new string[] {
