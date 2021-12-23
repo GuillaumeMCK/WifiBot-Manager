@@ -3,48 +3,127 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GestionnaireWifiBot.MVVM.View"
+             xmlns:local="clr-namespace:GestionnaireWifiBot.View"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             Background="Red">
-    <Grid >
+             d:DesignHeight="300" d:DesignWidth="300">
 
-            <Border Grid.Column="2" CornerRadius="3" 
-                    BorderThickness="2" Padding="5">
+    <StackPanel MinHeight="200" Margin="5" >
 
-                <StackPanel MinHeight="200">
+        <Border Background="#f0f0f0" CornerRadius="13"
+                Padding="9,0">
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <Image Margin="3" Height="14" Source="..\Images\micro.png" RenderOptions.BitmapScalingMode="Fant"/>
+                <TextBlock />
+            </StackPanel>
 
-                    <Border Background="#f0f0f0" CornerRadius="13"
-                            Padding="9,0">
-                        <StackPanel Orientation="Horizontal" Margin="3">
-
-                            <Image Margin="3" Height="14" Source="..\Images\micro.png" RenderOptions.BitmapScalingMode="Fant"/>
-                            <TextBlock />
-                        </StackPanel>
-
+        </Border>
+        <Rectangle Fill="#e8e8e8" Height="2" 
+                   RadiusX="1" RadiusY="1"
+                   Margin="8"/>
+        <ListBox x:Name="ListeActionsVocale" Grid.Row="1"
+                 Height="165" BorderThickness="0" 
+                 Background="Transparent"
+                 Focusable="False"
+                 SelectedItem="{Binding RvConfigSelectionne, Mode=TwoWay}">
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="CadetBlue" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Source="..\Images\buttons\pad_arrow_up.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Border>
-                    <Rectangle Fill="#e8e8e8"  Grid.Column="1" Height="2" 
-                               RadiusX="1" RadiusY="1"
-                               Margin="8"/>
-                    <ListBox VerticalAlignment="Top"
-                                 Grid.IsSharedSizeScope="True"
-                                 x:Name="RvConfigListBox" Grid.Row="1"
-                                 Grid.Column="0" BorderThickness="0" 
-                                 Background="Transparent"
-                                 IsHitTestVisible="False"
-                                 SelectedItem="{Binding RvConfigSelectionne, Mode=TwoWay}">
-
-                        <ListBoxItem>
-                            <WrapPanel>
-                                <Border Padding="2" Height="14" Width="14"
-                                        Background="#fff" CornerRadius="7">
-                                    <Image Source="..\Images\buttons\pad_arrow_up.png" RenderOptions.BitmapScalingMode="Fant"/>
-
-                                </Border>
-                            </WrapPanel>
-                        </ListBoxItem>
-                    </ListBox>
-                </StackPanel>
-            </Border>
-    </Grid>
+                    <TextBlock Margin="4,0" Text="Avancer"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="CadetBlue" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Source="..\Images\buttons\pad_arrow_up.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Avancer rapidement"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="CadetBlue" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Margin="1"  Source="..\Images\buttons\pad_arrow_up_right.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Avancer a droite"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="CadetBlue" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Margin="1"  Source="..\Images\buttons\pad_arrow_up_left.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Avancer a gauche"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                    BorderBrush="Yellow" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Margin="1"  Source="..\Images\buttons\pad_arrow_left.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Rotation a gauche"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                    BorderBrush="Yellow" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Margin="1"  Source="..\Images\buttons\pad_arrow_right.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Rotation a droite"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                    BorderBrush="Red" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Margin="1"  Source="..\Images\buttons\pad_stop.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Stop"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="Green" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Source="..\Images\buttons\pad_arrow_down.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Reculer"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="Green" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Source="..\Images\buttons\pad_arrow_down.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Reculer rapidement"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="Green" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Margin="1"  Source="..\Images\buttons\pad_arrow_down_right.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Reculer a droite"/>
+                </WrapPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <WrapPanel>
+                    <Border Padding="2" Height="14" Width="14"
+                                        BorderBrush="Green" BorderThickness="1" Background="#fff" CornerRadius="7">
+                        <Image Margin="1"  Source="..\Images\buttons\pad_arrow_down_left.png" RenderOptions.BitmapScalingMode="Fant"/>
+                    </Border>
+                    <TextBlock Margin="4,0" Text="Reculer a gauche"/>
+                </WrapPanel>
+            </ListBoxItem>
+        </ListBox>
+    </StackPanel>
 </UserControl>

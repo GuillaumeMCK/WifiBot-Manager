@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GestionnaireWifiBot.Commands;
-using GestionnaireWifiBot.MVVM.Model;
+using GestionnaireWifiBot.Model;
 
-namespace GestionnaireWifiBot.MVVM.ViewModel
+namespace GestionnaireWifiBot.ViewModel
 {
     class ControleBoutonViewModel : PiloterRoverViewModel
     {
@@ -53,26 +53,9 @@ namespace GestionnaireWifiBot.MVVM.ViewModel
             DownLeftPadButtonCommand = new BaseCommand(o => { L = -75; R = -100; });
 
             roverTask = new Task(() => SendCommand2Rover());
-            rvConfig = HomeViewModel.currentRvConfig;
 
-            if (rover == null || rover.ConnectionState == false)
-            {
-                rover = new Rover(rvConfig.AdresseIP, rvConfig.PortTCP);
-                rover.Connection();
-            }
-
-            if (rover.ConnectionState == true)
-            {
+            if (rover != null)
                 roverTask.Start();
-            }
-            else
-            {
-                MessageBox.Show("Une erreur est survenue lors de la connexion au rover.",
-                                "Erreur !",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Exclamation);
-            }
-
         }
 
         void SendCommand2Rover()

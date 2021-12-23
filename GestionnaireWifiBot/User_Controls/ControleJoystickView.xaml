@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:GestionnaireWifiBot.User_Controls.Base"
         mc:Ignorable="d">
-    <Grid>
-        <StackPanel VerticalAlignment="Center">
-            <uc:Joystick x:Name="joystick_view" 
+    <StackPanel VerticalAlignment="Center">
+        <uc:Joystick x:Name="joystick_view" 
                          Xvalue="{Binding X, 
                          UpdateSourceTrigger=PropertyChanged, 
                          Mode=OneWayToSource}"
                          Yvalue="{Binding Y, 
                          UpdateSourceTrigger=PropertyChanged, 
                          Mode=OneWayToSource}"/>
-        </StackPanel>
-    </Grid>
+    </StackPanel>
 </UserControl>

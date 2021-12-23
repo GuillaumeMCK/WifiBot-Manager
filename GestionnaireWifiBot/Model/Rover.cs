@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 
-namespace GestionnaireWifiBot.MVVM.Model
+namespace GestionnaireWifiBot.Model
 {
     class Rover
     {

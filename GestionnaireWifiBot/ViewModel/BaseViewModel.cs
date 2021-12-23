@@ -9,7 +9,7 @@ using GestionnaireWifiBot.Commands;
 using System.Windows.Input;
 using System.Windows;
 
-namespace GestionnaireWifiBot.MVVM.ViewModel
+namespace GestionnaireWifiBot.ViewModel
 {
     class BaseViewModel : INotifyPropertyChanged
     {

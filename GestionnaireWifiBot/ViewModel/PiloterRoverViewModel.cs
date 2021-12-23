@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using GestionnaireWifiBot.MVVM.ViewModel;
+using GestionnaireWifiBot.ViewModel;
 using GestionnaireWifiBot.User_Controls;
-using GestionnaireWifiBot.MVVM.Model;
 using System.Windows;
 using GestionnaireWifiBot.Commands;
+using GestionnaireWifiBot.Model;
 using System.Windows.Input;
 
-namespace GestionnaireWifiBot.MVVM.ViewModel
+namespace GestionnaireWifiBot.ViewModel
 {
     class  PiloterRoverViewModel : BaseViewModel
     {
-        protected static Rover rover;
-        protected static Config rvConfig;
+        public static Config rvConfig;
+        public static Rover rover;
 
         protected Byte[] ValeursAvancer = new Byte[41] {
             0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,
@@ -37,5 +37,7 @@ namespace GestionnaireWifiBot.MVVM.ViewModel
         {
             DeconnexionCommand = new BaseCommand(o => rover.Deconnexion());
         }
+
+
     }
 }

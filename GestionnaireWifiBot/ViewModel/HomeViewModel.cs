@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GestionnaireWifiBot.MVVM.Model;
-using GestionnaireWifiBot.MVVM.View;
+using GestionnaireWifiBot.Model;
+using GestionnaireWifiBot.View;
 using Microsoft.Win32;
 using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -15,7 +15,7 @@ using System.Windows;
 using System.Windows.Input;
 using GestionnaireWifiBot.Commands;
 
-namespace GestionnaireWifiBot.MVVM.ViewModel
+namespace GestionnaireWifiBot.ViewModel
 {
     class HomeViewModel : BaseViewModel
     {
@@ -66,7 +66,11 @@ namespace GestionnaireWifiBot.MVVM.ViewModel
             if (currentRvConfig!=null)
             {
                 piloterRoverView = new PiloterRoverView();
-                piloterRoverView.ShowDialog();
+                try // Mhhh...
+                {
+                    piloterRoverView.ShowDialog();
+                }
+                catch { }
             }
             else
             {

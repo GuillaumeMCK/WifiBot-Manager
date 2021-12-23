@@ -11,9 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using GestionnaireWifiBot.MVVM.ViewModel;
+using GestionnaireWifiBot.ViewModel;
+using GestionnaireWifiBot.Model;
 
-namespace GestionnaireWifiBot.MVVM.View
+namespace GestionnaireWifiBot.View
 {
     /// <summary>
     /// Logique d'interaction pour PiloterRoverView.xaml
@@ -24,8 +25,30 @@ namespace GestionnaireWifiBot.MVVM.View
         ControleJoystickViewModel controleJoystickViewModel;
         ControleVocaleViewModel controleVocaleViewModel;
 
+        Rover rover {
+            get { return PiloterRoverViewModel.rover; }
+            set { PiloterRoverViewModel.rover = value; }
+        }
+        Config config {
+            get { return PiloterRoverViewModel.rvConfig; }
+            set { PiloterRoverViewModel.rvConfig = value; }
+        }
+
         public PiloterRoverView()
         {
+            config = HomeViewModel.currentRvConfig;
+            rover = new Rover(config.AdresseIP, config.PortTCP);
+            rover.Connection();
+
+            if (rover.ConnectionState == false)
+            {
+                MessageBox.Show("Une erreur est survenue lors de la connexion au rover.",
+                                "Erreur !",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Exclamation);
+                this.Close();
+            }
+
             controleBoutonViewModel = new ControleBoutonViewModel();
             controleJoystickViewModel = new ControleJoystickViewModel();
             controleVocaleViewModel = new ControleVocaleViewModel();

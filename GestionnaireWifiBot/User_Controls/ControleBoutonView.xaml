@@ -56,33 +56,33 @@
                                 </Grid.RowDefinitions>
 
                                 <Button Command="{Binding UpLeftPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_up_left.png" Width="25" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_up_left.png" Width="25" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
                                 <Button Grid.Row="1" Command="{Binding LeftPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_left.png" Height="45"  RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_left.png" Height="45"  RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
                                 <Button Grid.Row="2" Command="{Binding DownLeftPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_down_left.png"  Height="25" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_down_left.png"  Height="25" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
                                 <Button Grid.Column="1"  Command="{Binding UpPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_up.png"  Width="45" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_up.png"  Width="45" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
                                 <Button Grid.Row="1" Grid.Column="1" Command="{Binding StopPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_stop_button.png"  Width="20" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_stop.png"  Width="20" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
 
                                 <Button Grid.Row="2" Grid.Column="1" Command="{Binding DownPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_down.png"  Width="45" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_down.png"  Width="45" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
 
                                 <Button Grid.Column="2" Command="{Binding UpRightPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_up_right.png"  Height="25" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_up_right.png"  Height="25" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
                                 <Button Grid.Row="1" Grid.Column="2" Command="{Binding RightPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_right.png"  Height="45" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_right.png"  Height="45" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
                                 <Button Grid.Row="2" Grid.Column="2" Command="{Binding DownRightPadButtonCommand}" Style="{StaticResource Pad_Button}">
-                                    <Image Source="../../Images/buttons/pad_arrow_down_right.png"  Height="25" RenderOptions.BitmapScalingMode="Fant"/>
+                                    <Image Source="../Images/buttons/pad_arrow_down_right.png"  Height="25" RenderOptions.BitmapScalingMode="Fant"/>
                                 </Button>
                             </Grid>
                         </StackPanel>

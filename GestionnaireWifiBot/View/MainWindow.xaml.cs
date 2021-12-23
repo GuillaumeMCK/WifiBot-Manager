@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GestionnaireWifiBot.MVVM.ViewModel;
 
-namespace GestionnaireWifiBot.MVVM.View
+namespace GestionnaireWifiBot.ViewModel
 {
     /// <summary>
-    /// Logique d'interaction pour DelConfigView.xaml
+    /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class SelConfigView : Window
+    public partial class MainWindow : Window
     {
+        HomeViewModel homeViewModel;
 
-        public SelConfigView()
+        public MainWindow()
         {
             InitializeComponent();
-            DataContext = new ConfigRvViewModel();
+            homeViewModel = new HomeViewModel();
+            DataContext = homeViewModel;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -35,12 +37,12 @@ namespace GestionnaireWifiBot.MVVM.View
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
 
         private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
         }
     }
 }

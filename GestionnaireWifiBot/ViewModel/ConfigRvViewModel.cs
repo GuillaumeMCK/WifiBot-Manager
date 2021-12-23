@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GestionnaireWifiBot.Commands;
-using GestionnaireWifiBot.MVVM.Model;
+using GestionnaireWifiBot.Model;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace GestionnaireWifiBot.MVVM.ViewModel
+namespace GestionnaireWifiBot.ViewModel
 {
     class ConfigRvViewModel : BaseViewModel
     {

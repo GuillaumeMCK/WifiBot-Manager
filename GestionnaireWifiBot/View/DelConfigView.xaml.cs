@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using GestionnaireWifiBot.MVVM.ViewModel;
+using GestionnaireWifiBot.ViewModel;
 
-namespace GestionnaireWifiBot.MVVM.View
+namespace GestionnaireWifiBot.View
 {
     /// <summary>
     /// Logique d'interaction pour DelConfigView.xaml

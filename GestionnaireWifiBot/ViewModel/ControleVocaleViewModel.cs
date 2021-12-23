@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Speech.Recognition;
-using GestionnaireWifiBot.MVVM.Model;
+using GestionnaireWifiBot.Model;
 using System.Windows;
 using System.Threading;
 
-namespace GestionnaireWifiBot.MVVM.ViewModel
+namespace GestionnaireWifiBot.ViewModel
 {
     class ControleVocaleViewModel : PiloterRoverViewModel
     {
@@ -65,24 +65,8 @@ namespace GestionnaireWifiBot.MVVM.ViewModel
 
             roverTask = new Task(() => SendVocalVals2Rover());
 
-            if (rover == null || rover.ConnectionState == false)
-            {
-                rover = new Rover(rvConfig.AdresseIP, rvConfig.PortTCP);
-                rover.Connection();
-            }
-
-            if (rover.ConnectionState == true)
-            {
+            if (rover != null)
                 roverTask.Start();
-            }
-            else
-            {
-                MessageBox.Show("Une erreur est survenue lors de la connexion au rover.",
-                                "Erreur !",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Exclamation);
-            }
-
         }
 
         private void SendVocalVals2Rover()

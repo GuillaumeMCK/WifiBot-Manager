@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionnaireWifiBot.MVVM.Model
+namespace GestionnaireWifiBot.Model
 {
     [Serializable]
     class Config
