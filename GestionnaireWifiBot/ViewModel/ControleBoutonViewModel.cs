@@ -88,6 +88,7 @@ namespace GestionnaireWifiBot.ViewModel
                 rover.Commander(new byte[] { LTrame, RTrame });
                 Thread.Sleep(200);
             };
+            
             roverTask.Wait();
             roverTask.Dispose();
         }

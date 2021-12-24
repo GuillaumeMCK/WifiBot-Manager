@@ -11,13 +11,11 @@
 
         <Border Background="#f0f0f0" CornerRadius="13"
                 Padding="9,0">
-           <Button HorizontalAlignment="Left" Background="Transparent" 
-                   BorderThickness="0" Command="{Binding }">
-                <StackPanel Orientation="Horizontal" Margin="3">
-                    <Image Margin="3" Height="15" Source="..\Images\micro.png" RenderOptions.BitmapScalingMode="Fant"/>
-                    <TextBlock Text="{Binding Mot_Reconnu, Mode=OneWay}" />
-                </StackPanel>
-            </Button>
+
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <Image Margin="3" Height="15" Source="..\Images\micro.png" RenderOptions.BitmapScalingMode="Fant"/>
+                <TextBlock Text="{Binding Mot_Reconnu, Mode=OneWay}" />
+            </StackPanel>
 
         </Border>
         <Rectangle Fill="#e8e8e8" Height="2" 
@@ -40,7 +38,7 @@
                             Background="#fff" CornerRadius="7">
                         <Image Margin="1"  Source="..\Images\buttons\pad_stop.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Border>
-                    <TextBlock Margin="4,0" Text="Stop"/>
+                    <TextBlock Margin="4,0" Text="Arrêt"/>
                 </WrapPanel>
             </ListBoxItem>
             <ListBoxItem>
@@ -49,7 +47,7 @@
                                         BorderBrush="CadetBlue" BorderThickness="1" Background="#fff" CornerRadius="7">
                         <Image Source="..\Images\buttons\pad_arrow_up.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Border>
-                    <TextBlock Margin="4,0" Text="Avancer"/>
+                    <TextBlock Margin="4,0" Text="Avancer normalement"/>
                 </WrapPanel>
             </ListBoxItem>
             <ListBoxItem>
@@ -104,7 +102,7 @@
                                         BorderBrush="Green" BorderThickness="1" Background="#fff" CornerRadius="7">
                         <Image Source="..\Images\buttons\pad_arrow_down.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Border>
-                    <TextBlock Margin="4,0" Text="Reculer"/>
+                    <TextBlock Margin="4,0" Text="Reculer normalement"/>
                 </WrapPanel>
             </ListBoxItem>
             <ListBoxItem>

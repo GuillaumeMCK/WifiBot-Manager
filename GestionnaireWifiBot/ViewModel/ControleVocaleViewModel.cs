@@ -45,41 +45,38 @@ namespace GestionnaireWifiBot.ViewModel
         Choices MouvementChoisie;
         GrammarBuilder ContraintesReconnaissance;
         Grammar MotsAReconnaitre;
-
-
-        public ICommand ParlerCommand { get; set; }
-
+        
         public ControleVocaleViewModel()
         {
+            //On construit le dictionnaire des mots à reconnaitre, ceux qui ne figurent pas dans cette liste ne seront pas reconnus
+            MouvementChoisie = new Choices(
+                "Avancer normalement", "Avancer rapidement", "Avancer à droite", "Avancer à gauche",
+                "Rotation à droite", "Rotation à gauche", "Arrêt",
+                "Reculer normalement", "Reculer rapidement", "Reculer à droite", "Reculer à gauche"
+            );
+            //On implante le dictionnaire dans le moteur de reconnaissance en utilisant un GrammarBuilder
+            ContraintesReconnaissance = new GrammarBuilder(MouvementChoisie);
+            ContraintesReconnaissance.Culture = new System.Globalization.CultureInfo("fr-FR");
+
+            MotsAReconnaitre = new Grammar(ContraintesReconnaissance);
             MoteurReconnaissance = new SpeechRecognitionEngine();   //Création d'un objet reconnaissance vocale
+            MoteurReconnaissance.LoadGrammar(MotsAReconnaitre);
+
             try
             {
                 MoteurReconnaissance.SetInputToDefaultAudioDevice();    //Capture l'entrée audio par défaut
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine("Micro non trouvé !");
-                Console.WriteLine(e);
+                MessageBox.Show("Micro non trouvé ou inaccessible !");
             }
-
-            //On construit le dictionnaire des mots à reconnaitre, ceux qui ne figurent pas dans cette liste ne seront pas reconnus
-            MouvementChoisie = new Choices(new string[] {
-                "Avancer", "Avancer rapidement", "Avancer à droite", "Avancer à gauche",
-                "Rotation à droite", "Rotation à gauche", "Stop",
-                "Reculer", "Reculer rapidement", "Reculer à droite", "Reculer à gauche",
-            });
-
-            //On implante le dictionnaire dans le moteur de reconnaissance en utilisant un GrammarBuilder
-            ContraintesReconnaissance = new GrammarBuilder(MouvementChoisie);
-            MotsAReconnaitre = new Grammar(ContraintesReconnaissance);
-            ContraintesReconnaissance.Culture = new System.Globalization.CultureInfo("fr-FR");
-            MoteurReconnaissance.LoadGrammarAsync(MotsAReconnaitre);
 
             //évennements liés à la reconnaissance vocale
             MoteurReconnaissance.SpeechRecognized += MoteurReconnaissance_SpeechRecognized; //Evennement déclanché lorsqu'un mot est reconnu
             MoteurReconnaissance.SpeechRecognitionRejected += MoteurReconnaissance_SpeechRecognitionRejected;   //Evennement déclanché lorsqu'un mot n'est pas reconnu
 
-            ParlerCommand = new BaseCommand(o => MoteurReconnaissance.RecognizeAsync(RecognizeMode.Single));
+            MoteurReconnaissance.RecognizeAsync(RecognizeMode.Multiple);
+
             roverTask = new Task(() => SendVocalVals2Rover());
 
             roverTask.Start();
@@ -87,17 +84,16 @@ namespace GestionnaireWifiBot.ViewModel
 
         private void MoteurReconnaissance_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            Console.WriteLine(e.Result.Text);
             Mot_Reconnu = e.Result.Text;
             switch (e.Result.Text)  //exécute la commande en fonction de mots définits
             {
-                case "Stop":
+                case "Arrêt":
                     ActionVocaleIndexListe = 0;
                     vitesse = 0;
                     L = 0;
                     R = 0;
                     break;
-                case "Avancer":
+                case "Avancer normalement":
                     ActionVocaleIndexListe = 1;
                     vitesse = 20;
                     L = 100;
@@ -133,7 +129,7 @@ namespace GestionnaireWifiBot.ViewModel
                     L = 50;
                     R = -50;
                     break;
-                case "Reculer":
+                case "Reculer normalement":
                     ActionVocaleIndexListe = 7;
                     vitesse = 20;
                     L = -100;
@@ -165,7 +161,8 @@ namespace GestionnaireWifiBot.ViewModel
 
         private void MoteurReconnaissance_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
         {
-            MessageBox.Show("Mot non reconnu !");
+            //MessageBox.Show("Commande non reconnu !");
+
         }
 
         void SendVocalVals2Rover()
@@ -176,6 +173,11 @@ namespace GestionnaireWifiBot.ViewModel
             int normL;
             while (rover.ConnectionState != false)
             {
+                while (!CommandLoopActivated && rover.ConnectionState == true)
+                {
+                    Console.WriteLine("Waiting Voice Control Loop...");
+                    Thread.Sleep(1000);
+                }
 
                 normR = (int)Math.Abs(Math.Round(vitesse * (R / 100.0)));
                 normL = (int)Math.Abs(Math.Round(vitesse * (L / 100.0)));
@@ -194,15 +196,10 @@ namespace GestionnaireWifiBot.ViewModel
                 rover.Commander(new byte[] { LTrame, RTrame });
                 Thread.Sleep(200);
 
-                while (!CommandLoopActivated && rover.ConnectionState == true)
-                {
-                    Console.WriteLine("Waiting Voice Control Loop...");
-                    Thread.Sleep(1000);
-                }
             };
+            MoteurReconnaissance.Dispose();
             roverTask.Wait();
             roverTask.Dispose();
         }
-
     }
 }
