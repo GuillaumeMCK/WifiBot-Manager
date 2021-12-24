@@ -36,6 +36,8 @@ namespace GestionnaireWifiBot.View
 
         public PiloterRoverView()
         {
+            InitializeComponent();
+            
             config = HomeViewModel.currentRvConfig;
             rover = new Rover(config.AdresseIP, config.PortTCP);
             rover.Connection();
@@ -48,17 +50,18 @@ namespace GestionnaireWifiBot.View
                                 MessageBoxImage.Exclamation);
                 this.Close();
             }
+            else
+            {
+                controleBoutonViewModel = new ControleBoutonViewModel();
+                controleJoystickViewModel = new ControleJoystickViewModel();
+                controleVocaleViewModel = new ControleVocaleViewModel();
 
-            controleBoutonViewModel = new ControleBoutonViewModel();
-            controleJoystickViewModel = new ControleJoystickViewModel();
-            controleVocaleViewModel = new ControleVocaleViewModel();
+                ControleBoutonViewModel.CommandLoopActivated = true;
+                ControleJoystickViewModel.CommandLoopActivated = false;
+                ControleVocaleViewModel.CommandLoopActivated = false;
 
-            ControleBoutonViewModel.CommandLoopActivated = true;
-            ControleJoystickViewModel.CommandLoopActivated = false;
-            ControleVocaleViewModel.CommandLoopActivated = false;
-
-            InitializeComponent();
-            DataContext = controleBoutonViewModel;
+                DataContext = controleBoutonViewModel;
+            }
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

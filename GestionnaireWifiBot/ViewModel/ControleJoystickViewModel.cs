@@ -40,8 +40,7 @@ namespace GestionnaireWifiBot.ViewModel
         {
             roverTask = new Task(() => SendJstkVals2Rover());
 
-            if (rover != null)
-                roverTask.Start();
+            roverTask.Start();
         }
 
 

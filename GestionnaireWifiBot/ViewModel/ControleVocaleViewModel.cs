@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Speech;
 using System.Speech.Recognition;
 using GestionnaireWifiBot.Model;
 using System.Windows;
 using System.Threading;
+using System.Windows.Input;
+using GestionnaireWifiBot.Commands;
 
 namespace GestionnaireWifiBot.ViewModel
 {
@@ -16,13 +19,6 @@ namespace GestionnaireWifiBot.ViewModel
         int L = 0;       // Ratio de rotation des roues gauches
         int R = 0;       // Ratio de rotation des roues droite
         int vitesse = 0; // definit la vitesse du rover 0 - 40
-        Task roverTask;
-
-        SpeechRecognitionEngine MoteurReconnaissance;
-        Choices MouvementChoisie;
-        GrammarBuilder ContraintesReconnaissance;
-        Grammar MotsAReconnaitre;
-
         string mot_reconnu;
         public string Mot_Reconnu
         {
@@ -30,10 +26,28 @@ namespace GestionnaireWifiBot.ViewModel
             set
             {
                 mot_reconnu = value;
-                OnPropertyChanged(Mot_Reconnu);
+                OnPropertyChanged(nameof(Mot_Reconnu));
             }
         }
+        int actionVocaleIndexListe = 0;
+        public int ActionVocaleIndexListe
+        {
+            get { return actionVocaleIndexListe; }
+            set
+            {
+                actionVocaleIndexListe = value;
+                OnPropertyChanged(nameof(ActionVocaleIndexListe));
+            }
+        }
+        Task roverTask;
 
+        SpeechRecognitionEngine MoteurReconnaissance;
+        Choices MouvementChoisie;
+        GrammarBuilder ContraintesReconnaissance;
+        Grammar MotsAReconnaitre;
+
+
+        public ICommand ParlerCommand { get; set; }
 
         public ControleVocaleViewModel()
         {
@@ -41,86 +55,110 @@ namespace GestionnaireWifiBot.ViewModel
             try
             {
                 MoteurReconnaissance.SetInputToDefaultAudioDevice();    //Capture l'entrée audio par défaut
-
             }
             catch (Exception e)
             {
+                Console.WriteLine("Micro non trouvé !");
                 Console.WriteLine(e);
             }
 
             //On construit le dictionnaire des mots à reconnaitre, ceux qui ne figurent pas dans cette liste ne seront pas reconnus
             MouvementChoisie = new Choices(new string[] {
-                "Avance Rapidement", "Avance Normalement", "Avance Lentement", "Recule Rapidement",
-                "Recule Normalement", "Recule Lentement", "Tourne à droite", "Tourne à gauche", "Stop"
+                "Avancer", "Avancer rapidement", "Avancer à droite", "Avancer à gauche",
+                "Rotation à droite", "Rotation à gauche", "Stop",
+                "Reculer", "Reculer rapidement", "Reculer à droite", "Reculer à gauche",
             });
 
             //On implante le dictionnaire dans le moteur de reconnaissance en utilisant un GrammarBuilder
             ContraintesReconnaissance = new GrammarBuilder(MouvementChoisie);
             MotsAReconnaitre = new Grammar(ContraintesReconnaissance);
+            ContraintesReconnaissance.Culture = new System.Globalization.CultureInfo("fr-FR");
             MoteurReconnaissance.LoadGrammarAsync(MotsAReconnaitre);
 
             //évennements liés à la reconnaissance vocale
             MoteurReconnaissance.SpeechRecognized += MoteurReconnaissance_SpeechRecognized; //Evennement déclanché lorsqu'un mot est reconnu
             MoteurReconnaissance.SpeechRecognitionRejected += MoteurReconnaissance_SpeechRecognitionRejected;   //Evennement déclanché lorsqu'un mot n'est pas reconnu
 
+            ParlerCommand = new BaseCommand(o => MoteurReconnaissance.RecognizeAsync(RecognizeMode.Single));
             roverTask = new Task(() => SendVocalVals2Rover());
 
-            if (rover != null)
-                roverTask.Start();
-        }
-
-        private void SendVocalVals2Rover()
-        {
-
+            roverTask.Start();
         }
 
         private void MoteurReconnaissance_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
+            Console.WriteLine(e.Result.Text);
+            Mot_Reconnu = e.Result.Text;
             switch (e.Result.Text)  //exécute la commande en fonction de mots définits
             {
-                //case "Avance Rapidement":
-                //    listBoxVocal.SelectedIndex = 0;
-                //    vitesse = 40;
-                //    break;
-
-                //case "Avance Normalement":
-                //    listBoxVocal.SelectedIndex = 1;
-
-                //    break;                         
-
-                //case "Avance Lentement":
-                //    listBoxVocal.SelectedIndex = 2;
-
-                //    break;
-
-                //case "Recule Rapidement":
-                //    listBoxVocal.SelectedIndex = 3;
-
-                //    break;
-
-                //case "Recule Normalement":
-                //    listBoxVocal.SelectedIndex = 4;
-
-                //    break;
-
-                //case "Recule Lentement":
-                //    listBoxVocal.SelectedIndex = 5;
-
-                //    break;
-
-                //case "Tourne à gauche":
-                //    listBoxVocal.SelectedIndex = 6;
-
-                //    break;
-
-                //case "Tourne à droite":
-                //    listBoxVocal.SelectedIndex = 7;
-
-                //    break;
-
-                //case "Stop":
-                //    listBoxVocal.SelectedIndex = 8;
-                //    break;
+                case "Stop":
+                    ActionVocaleIndexListe = 0;
+                    vitesse = 0;
+                    L = 0;
+                    R = 0;
+                    break;
+                case "Avancer":
+                    ActionVocaleIndexListe = 1;
+                    vitesse = 20;
+                    L = 100;
+                    R = 100;
+                    break;
+                case "Avancer rapidement":
+                    ActionVocaleIndexListe = 2;
+                    vitesse = 40;
+                    L = 100;
+                    R = 100;
+                    break;
+                case "Avancer à droite":
+                    ActionVocaleIndexListe = 3;
+                    vitesse = 30;
+                    L = 100;
+                    R = 75;
+                    break;
+                case "Avancer à gauche":
+                    ActionVocaleIndexListe = 4;
+                    vitesse = 30;
+                    L = 75;
+                    R = 100;
+                    break;
+                case "Rotation à gauche":
+                    ActionVocaleIndexListe = 5;
+                    vitesse = 20;
+                    L = -50;
+                    R = 50;
+                    break;
+                case "Rotation à droite":
+                    ActionVocaleIndexListe = 6;
+                    vitesse = 20;
+                    L = 50;
+                    R = -50;
+                    break;
+                case "Reculer":
+                    ActionVocaleIndexListe = 7;
+                    vitesse = 20;
+                    L = -100;
+                    R = -100;
+                    break;
+                case "Reculer rapidement":
+                    ActionVocaleIndexListe = 8;
+                    vitesse = 40;
+                    L = -100;
+                    R = -100;
+                    break;
+                case "Reculer à droite":
+                    ActionVocaleIndexListe = 9;
+                    vitesse = 30;
+                    L = -100;
+                    R = -75;
+                    break;
+                case "Reculer à gauche":
+                    ActionVocaleIndexListe = 10;
+                    vitesse = 30;
+                    L = -75;
+                    R = -100;
+                    break;
+                default:
+                    break;
             }
 
         }
@@ -130,7 +168,7 @@ namespace GestionnaireWifiBot.ViewModel
             MessageBox.Show("Mot non reconnu !");
         }
 
-        void SendCommand2Rover()
+        void SendVocalVals2Rover()
         {
             byte RTrame;
             byte LTrame;
@@ -138,6 +176,7 @@ namespace GestionnaireWifiBot.ViewModel
             int normL;
             while (rover.ConnectionState != false)
             {
+
                 normR = (int)Math.Abs(Math.Round(vitesse * (R / 100.0)));
                 normL = (int)Math.Abs(Math.Round(vitesse * (L / 100.0)));
 
@@ -150,7 +189,7 @@ namespace GestionnaireWifiBot.ViewModel
                 else
                     LTrame = ValeursReculer[normL];
 
-                Console.WriteLine(L + " : " + normL + "  " + R + " : " + normR);
+                //Console.WriteLine(L + " : " + normL + "  " + R + " : " + normR);
 
                 rover.Commander(new byte[] { LTrame, RTrame });
                 Thread.Sleep(200);
@@ -160,7 +199,6 @@ namespace GestionnaireWifiBot.ViewModel
                     Console.WriteLine("Waiting Voice Control Loop...");
                     Thread.Sleep(1000);
                 }
-
             };
             roverTask.Wait();
             roverTask.Dispose();

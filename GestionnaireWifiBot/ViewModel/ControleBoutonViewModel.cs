@@ -54,8 +54,7 @@ namespace GestionnaireWifiBot.ViewModel
 
             roverTask = new Task(() => SendCommand2Rover());
 
-            if (rover != null)
-                roverTask.Start();
+            roverTask.Start();
         }
 
         void SendCommand2Rover()
@@ -84,7 +83,7 @@ namespace GestionnaireWifiBot.ViewModel
                 else
                     LTrame = ValeursReculer[normL];
 
-                Console.WriteLine( L + " : " + normL + "  "+ R +" : " + normR);
+                //Console.WriteLine( L + " : " + normL + "  "+ R +" : " + normR);
 
                 rover.Commander(new byte[] { LTrame, RTrame });
                 Thread.Sleep(200);
