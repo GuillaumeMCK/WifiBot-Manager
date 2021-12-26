@@ -1,4 +1,5 @@
 ﻿<Window x:Class="GestionnaireWifiBot.View.AddConfigView"
+        x:Name="Window_Ajouter_Config"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,14 +7,13 @@
         xmlns:local="clr-namespace:GestionnaireWifiBot.View"
         xmlns:VC="clr-namespace:GestionnaireWifiBot.ViewModel"
         mc:Ignorable="d"
-        Title="AddConfig"         
+        Title="Ajouter une configuration"
         Height="180" Width="300"
         MinHeight="180" MinWidth="300"
         Background="#fff"
         WindowStyle="None"
         AllowsTransparency="True"
-        ResizeMode="NoResize"
-        x:Name="Ajouter_une_configuration_Window">
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -32,11 +32,13 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Button Style="{StaticResource Button_ControlBox}"
-                            Click="ButtonMinimize_Click">
+                            Command="{Binding MinimizeWindowCommand, Mode=OneWay}"
+                            CommandParameter="{Binding ElementName=Window_Ajouter_Config}">
                         <TextBlock Text="__" Margin="0,0,0,4" />
                     </Button>
                     <Button Content="✕" Style="{StaticResource ControlBoxCloseButton}"
-                            Click="ButtonExit_Click"/>
+                            Command="{Binding CloseWindowCommand, Mode=OneWay}"
+                            CommandParameter="{Binding ElementName=Window_Ajouter_Config}"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -46,68 +48,70 @@
                     Background="White">
 
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel>
-                    <WrapPanel Orientation="Horizontal">
-                        <TextBlock Text="Nom du rover" VerticalAlignment="Center"/>
-                        <TextBlock Text=":" Margin="5,0" VerticalAlignment="Center"/>
-                        <Border BorderThickness="0,0,0,1" BorderBrush="#202225">
-                            <TextBox x:Name="NomRover_TextBox" 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Nom du rover" VerticalAlignment="Center"/>
+                <TextBlock Text=":" Margin="5,0" VerticalAlignment="Center" Grid.Column="1"/>
+                <Border Margin="0,3" BorderThickness="0,0,0,1" BorderBrush="#202225" 
+                            Grid.Column="2">
+                    <TextBox x:Name="NomRover_TextBox" 
                                      Text="{ Binding RvConfig_Nom, 
                                              UpdateSourceTrigger=LostFocus, 
                                              Mode=TwoWay}"
                                      VerticalAlignment="Center"
-                                     MinWidth="60"
+                                     HorizontalAlignment="Stretch"
                                      Foreground="#333"
                                      MaxLength="20"
                                      Background="Transparent"
-                                     BorderThickness="0"
-                                     />
-                        </Border>
-                    </WrapPanel>
-                    <WrapPanel Orientation="Horizontal" Margin="0,3">
-                        <WrapPanel>
-                            <TextBlock Text="Adresse IP" VerticalAlignment="Center"/>
-                            <TextBlock Text=":" Margin="5,0" VerticalAlignment="Center"/>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="#202225">
-                                <TextBox x:Name="AdresseIP_TextBox" 
-                                         VerticalAlignment="Center"
-                                         Text="{Binding RvConfig_IP, 
-                                                     UpdateSourceTrigger=LostFocus, 
-                                                     Mode=TwoWay}"
-                                         PreviewTextInput="RegexPreviewIpTextbox"
-                                         MinWidth="60"
-                                         Foreground="#333"
-                                         MaxLength="18"
-                                         Background="Transparent"
-                                         BorderThickness="0"
-                                     />
-                            </Border>
-                        </WrapPanel>
-                    </WrapPanel>
-                    <WrapPanel Orientation="Horizontal">
-                        <WrapPanel>
-                            <TextBlock Text="Port TCP" VerticalAlignment="Center"/>
-                            <TextBlock Text=":" Margin="5,0" VerticalAlignment="Center"/>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="#202225">
-                                <TextBox x:Name="PortTCP_TextBox" 
+                                     BorderThickness="0"/>
+                </Border>
+
+                <TextBlock Text="Adresse IP" VerticalAlignment="Center" Grid.Row="1"/>
+                <TextBlock Text=":" Margin="5,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+                <Border Margin="0,3"  BorderThickness="0,0,0,1" BorderBrush="#202225"
+                            Grid.Row="1" Grid.Column="2">
+                    <TextBox x:Name="AdresseIP_TextBox" 
+                             VerticalAlignment="Center"
+                             Text="{Binding RvConfig_IP, 
+                                     UpdateSourceTrigger=LostFocus, 
+                                     Mode=TwoWay}"
+                             PreviewTextInput="RegexPreviewIpTextbox"
+                             Foreground="#333"
+                             MaxLength="18"
+                             Background="Transparent"
+                             BorderThickness="0" />
+                </Border>
+
+                <TextBlock Text="Port TCP" VerticalAlignment="Center" Grid.Row="2"/>
+                <TextBlock Text=":" Margin="5,0" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+                <WrapPanel Margin="0,3" Orientation="Horizontal" Grid.Row="2" Grid.Column="3">
+                    <Border  BorderThickness="0,0,0,1" BorderBrush="#202225">
+                        <TextBox x:Name="PortTCP_TextBox" 
                                          VerticalAlignment="Center"
                                          Text="{Binding RvConfig_Port, 
                                                  UpdateSourceTrigger=LostFocus, 
                                                  Mode=TwoWay}"
                                          PreviewTextInput="RegexPreviewPortTextbox"
-                                         MinWidth="60"
+                                         MinWidth="38"
                                          Foreground="#333"
                                          MaxLength="5"
                                          Background="Transparent"
                                          BorderThickness="0"
                                      />
-                            </Border>
-                            <TextBlock Text="(15015 à 15025)" FontStyle="Italic"
+                    </Border>
+                    <TextBlock Text="(15015 à 15025)" FontStyle="Italic"
                                        FontSize="10" FontWeight="DemiBold" VerticalAlignment="Bottom"
-                                       Margin="10,0"/>
-                        </WrapPanel>
-                    </WrapPanel>
-                </StackPanel>
+                                       Margin="3,0"/>
+                </WrapPanel>
             </Grid>
         </Border>
 
@@ -123,7 +127,7 @@
 
                 <Button HorizontalAlignment="Left" Style="{StaticResource Base}"
                         Command="{Binding CancelCommand}"
-                        CommandParameter="{Binding ElementName=Ajouter_une_configuration_Window}">
+                        CommandParameter="{Binding ElementName=Window_Ajouter_Config}">
                     <WrapPanel>
                         <TextBlock VerticalAlignment="Center" Text="Annuler"/>
                     </WrapPanel>

@@ -17,7 +17,6 @@ namespace GestionnaireWifiBot.ViewModel
     {
         //---------------------------------
         // ATTRIBUTS
-
         public static bool annuler { get; set; } 
         public static ObservableCollection<Config> listeRvConfig;
         public ObservableCollection<Config> ListeRvConfig
@@ -29,35 +28,36 @@ namespace GestionnaireWifiBot.ViewModel
                 OnPropertyChanged(nameof(ListeRvConfig));
             }
         }
-
-        // Caracterise un rover avec des parametres valides
         public Config rvConfig { get; set; }
+
+        // Rover avec des parametres valides
+        string rvConfig_Nom = "Rover";
         public string RvConfig_Nom
         {
-            get { return rvConfig.NomDuRover; }
-            set { rvConfig.NomDuRover = value; }
+            get { return rvConfig_Nom; }
+            set { rvConfig_Nom = value; }
         }
+        string rvConfig_IP = "127.0.0.1";
         public string RvConfig_IP
         {
-            get { return rvConfig.AdresseIP; }
+            get { return rvConfig_IP; }
             set
             {
                 IPAddress IP;
-
                 if (IPAddress.TryParse(value, out IP))
-                    rvConfig.AdresseIP = IP.MapToIPv4().ToString();
+                    rvConfig_IP = IP.MapToIPv4().ToString();
                 else
                     Console.WriteLine("IP Invalide");
-
             }
         }
+        int rvConfig_Port = 15020;
         public int RvConfig_Port
         {
-            get { return rvConfig.PortTCP; }
+            get { return rvConfig_Port; }
             set
             {
                 if (15015 <= value && value <= 15025)
-                    rvConfig.PortTCP = value;
+                    rvConfig_Port = value;
                 else
                     Console.WriteLine("Port Invalide");
             }
@@ -75,29 +75,21 @@ namespace GestionnaireWifiBot.ViewModel
             }
         }
 
-        // Commandes Routée
-        public ICommand AddConfigCommand { get; }
-        public ICommand DeleteConfigCommand { get; }
-        public ICommand SetSelectConfigCommand { get; }
-        public ICommand CancelCommand { get; }
-        public ICommand SelectExitCommand { get; }
+        public ICommand AddConfigCommand { get; set; }
+        public ICommand DeleteConfigCommand { get; set; }
+        public ICommand SetSelectConfigCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
 
         public ConfigRvViewModel()
         {
             listeRvConfig = new ObservableCollection<Config>(HomeViewModel.listeRvConfig);
-            rvConfig = new Config()
-            {
-                NomDuRover = "Rover",
-                AdresseIP = "127.0.0.1",
-                PortTCP = 15020
-            };
+            rvConfig = new Config(); // { NomDuRover = "Rover", AdresseIP = "127.0.0.1", PortTCP = 15020 };
             annuler = false;
 
             AddConfigCommand       = new BaseCommand(o => AddConfig());
             DeleteConfigCommand    = new BaseCommand(o => DeleteConfig());
             SetSelectConfigCommand = new BaseCommand(o => SetCurrentRvConfig());
             CancelCommand          = new BaseCommand(o => { annuler = true; ((Window)o).Close();});
-            SelectExitCommand      = new BaseCommand(o => { annuler = true; });
         }
 
         private void DeleteConfig()
@@ -118,7 +110,7 @@ namespace GestionnaireWifiBot.ViewModel
             if (RvConfigSelectionne != null)
             {
                 rvConfig = RvConfigSelectionne;
-                Console.WriteLine("-- debug --\n" + rvConfig.NomDuRover + "\n" + rvConfig.AdresseIP + "\n" + rvConfig.PortTCP);
+                annuler = false;
             }
             else
             {
@@ -128,20 +120,26 @@ namespace GestionnaireWifiBot.ViewModel
                                 MessageBoxImage.Information);
                 annuler = true;
             }
-
         }
         
 
         private void AddConfig()
         {
-            Console.WriteLine("-- debug --\n" + rvConfig.NomDuRover + "\n" + rvConfig.AdresseIP + "\n" + rvConfig.PortTCP);
-
-            if (!ListeRvConfig.Any(item => item.NomDuRover == rvConfig.NomDuRover &&
-                                           item.AdresseIP == rvConfig.AdresseIP &&
-                                           item.PortTCP == rvConfig.PortTCP))
-                ListeRvConfig.Add(rvConfig);
+            if (!ListeRvConfig.Any(item => item.NomDuRover == rvConfig_Nom &&
+                                           item.AdresseIP == rvConfig_IP &&
+                                           item.PortTCP == rvConfig_Port))
+            {
+                ListeRvConfig.Add(new Config() { NomDuRover = rvConfig_Nom, AdresseIP = rvConfig_IP, PortTCP=rvConfig_Port });
+                annuler = false;
+            }
             else
-                Console.WriteLine("Cette configuration existe deja");
+            {
+                MessageBox.Show("Cette configuration existe deja !",
+                    "Opération impossible !",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                annuler = true;
+            }
         }
     }
 }

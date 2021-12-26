@@ -29,7 +29,6 @@ namespace GestionnaireWifiBot.ViewModel
                 OnPropertyChanged(nameof(Mot_Reconnu));
             }
         }
-        int actionVocaleIndexListe = 0;
         public int ActionVocaleIndexListe
         {
             get { return actionVocaleIndexListe; }
@@ -39,8 +38,9 @@ namespace GestionnaireWifiBot.ViewModel
                 OnPropertyChanged(nameof(ActionVocaleIndexListe));
             }
         }
+        int actionVocaleIndexListe = 0;
+        bool microIsFound = false;
         Task roverTask;
-
         SpeechRecognitionEngine MoteurReconnaissance;
         Choices MouvementChoisie;
         GrammarBuilder ContraintesReconnaissance;
@@ -62,24 +62,28 @@ namespace GestionnaireWifiBot.ViewModel
             MoteurReconnaissance = new SpeechRecognitionEngine();   //Création d'un objet reconnaissance vocale
             MoteurReconnaissance.LoadGrammar(MotsAReconnaitre);
 
+            //évennements liés à la reconnaissance vocale
+            MoteurReconnaissance.SpeechRecognized += MoteurReconnaissance_SpeechRecognized; //Evennement déclanché lorsqu'un mot est reconnu
+            MoteurReconnaissance.SpeechRecognitionRejected += MoteurReconnaissance_SpeechRecognitionRejected;   //Evennement déclanché lorsqu'un mot n'est pas reconnu
+
             try
             {
                 MoteurReconnaissance.SetInputToDefaultAudioDevice();    //Capture l'entrée audio par défaut
+                microIsFound = true;
             }
             catch
             {
                 MessageBox.Show("Micro non trouvé ou inaccessible !");
             }
 
-            //évennements liés à la reconnaissance vocale
-            MoteurReconnaissance.SpeechRecognized += MoteurReconnaissance_SpeechRecognized; //Evennement déclanché lorsqu'un mot est reconnu
-            MoteurReconnaissance.SpeechRecognitionRejected += MoteurReconnaissance_SpeechRecognitionRejected;   //Evennement déclanché lorsqu'un mot n'est pas reconnu
+            if(microIsFound)
+            {
+                MoteurReconnaissance.RecognizeAsync(RecognizeMode.Multiple);
 
-            MoteurReconnaissance.RecognizeAsync(RecognizeMode.Multiple);
+                roverTask = new Task(() => SendVocalVals2Rover());
 
-            roverTask = new Task(() => SendVocalVals2Rover());
-
-            roverTask.Start();
+                roverTask.Start();
+            }
         }
 
         private void MoteurReconnaissance_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -156,13 +160,11 @@ namespace GestionnaireWifiBot.ViewModel
                 default:
                     break;
             }
-
         }
 
         private void MoteurReconnaissance_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
         {
             //MessageBox.Show("Commande non reconnu !");
-
         }
 
         void SendVocalVals2Rover()

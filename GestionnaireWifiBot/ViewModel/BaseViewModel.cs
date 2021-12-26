@@ -13,16 +13,17 @@ namespace GestionnaireWifiBot.ViewModel
 {
     class BaseViewModel : INotifyPropertyChanged
     {
-        public ICommand CloseWindowCommand;
+        public ICommand CloseWindowCommand { get; set; }
+        public ICommand MinimizeWindowCommand { get; set; }
+        public ICommand MoveWindowCommand { get; set; }
 
         public BaseViewModel()
         {
-            CloseWindowCommand = new BaseCommand(o => CloseWindow(o));
-        }
+            CloseWindowCommand    = new BaseCommand(o => ((Window)o).Close());
+            MinimizeWindowCommand = new BaseCommand(o => ((Window)o).WindowState = WindowState.Minimized);
+            MoveWindowCommand = new BaseCommand(o => {
 
-        public void CloseWindow(object o)
-        {
-            ((Window)o).Close(); 
+            }); 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

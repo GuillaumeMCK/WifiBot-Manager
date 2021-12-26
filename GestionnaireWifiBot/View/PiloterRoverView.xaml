@@ -1,4 +1,5 @@
 ﻿<Window x:Class="GestionnaireWifiBot.View.PiloterRoverView"
+        x:Name="Window_PiloterRover"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -35,11 +36,13 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Button Style="{StaticResource Button_ControlBox}"
-                            Click="ButtonMinimize_Click">
+                            Command="{Binding MinimizeWindowCommand, Mode=OneWay}"
+                            CommandParameter="{Binding ElementName=Window_PiloterRover}">
                         <TextBlock Text="__" Margin="0,0,0,4" />
                     </Button>
                     <Button Content="✕" Style="{StaticResource ControlBoxCloseButton}"
-                            Click="ButtonExit_Click" Command="{Binding DeconnexionCommand}"/>
+                            Command="{Binding CloseWindowCommand, Mode=OneWay}"
+                            CommandParameter="{Binding ElementName=Window_PiloterRover}"/>
                 </StackPanel>
             </Grid>
         </Border>

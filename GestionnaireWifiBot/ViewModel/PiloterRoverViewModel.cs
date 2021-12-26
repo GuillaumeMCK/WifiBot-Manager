@@ -31,13 +31,12 @@ namespace GestionnaireWifiBot.ViewModel
             0x9e,0x9f,0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,
             0xa8 };
 
-        public ICommand DeconnexionCommand { get; }
-
         public PiloterRoverViewModel()
         {
-            DeconnexionCommand = new BaseCommand(o => rover.Deconnexion());
+            CloseWindowCommand = new BaseCommand(o => {
+                rover.Disconnect();
+                ((Window)o).Close();
+            });
         }
-
-
     }
 }

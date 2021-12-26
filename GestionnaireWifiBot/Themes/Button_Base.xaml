@@ -4,7 +4,7 @@
     <Style TargetType="{x:Type Button}" x:Key="Base" >
         <Setter Property="Background" Value="#f0f0f0"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="Foreground" Value="#2f2f2f"/>
         <Setter Property="FontFamily" Value="Poppins"/>
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="Template">

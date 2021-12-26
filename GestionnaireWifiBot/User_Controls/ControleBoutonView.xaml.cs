@@ -15,4 +15,14 @@ using System.Windows.Shapes;
 
 namespace GestionnaireWifiBot.User_Controls
 {
+    /// <summary>
+    /// Logique d'interaction pour ControleBoutonView.xaml
+    /// </summary>
+    public partial class ControleBoutonView : UserControl
+    {
+        public ControleBoutonView()
+        {
+            InitializeComponent();
+        }
+    }
 }

@@ -32,15 +32,5 @@ namespace GestionnaireWifiBot.View
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
         }
-
-        private void ButtonExit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
     }
 }

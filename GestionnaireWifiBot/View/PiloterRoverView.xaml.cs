@@ -70,16 +70,6 @@ namespace GestionnaireWifiBot.View
                 this.DragMove();
         }
 
-        private void ButtonExit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
         private void Menu_Item_GOTO_ButtonMode(object sender, RoutedEventArgs e)
         {
             if (DataContext != controleBoutonViewModel)

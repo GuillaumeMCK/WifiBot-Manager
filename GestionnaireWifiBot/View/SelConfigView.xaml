@@ -1,4 +1,5 @@
 ﻿<Window x:Class="GestionnaireWifiBot.View.SelConfigView"
+        x:Name="Window_Selectionner_Config"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,8 +12,7 @@
         Background="#fff"
         WindowStyle="None"
         AllowsTransparency="True"
-        ResizeMode="NoResize"
-        x:Name="Select_une_configuration_Window">
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -31,11 +31,13 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Button Style="{StaticResource Button_ControlBox}"
-                            Click="ButtonMinimize_Click">
+                            Command="{Binding MinimizeWindowCommand, Mode=OneWay}"
+                            CommandParameter="{Binding ElementName=Window_Selectionner_Config}">
                         <TextBlock Text="__" Margin="0,0,0,4" />
                     </Button>
                     <Button Content="✕" Style="{StaticResource ControlBoxCloseButton}"
-                            Click="ButtonExit_Click" Command="{Binding SelectExitCommand}"/>
+                            Command="{Binding CloseWindowCommand, Mode=OneWay}"
+                            CommandParameter="{Binding ElementName=Window_Selectionner_Config}"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -44,55 +46,50 @@
                 BorderThickness="2" CornerRadius="3"
                 Background="White">
 
-            <Border Margin="6" Background="Transparent" CornerRadius="3">
-                <ListBox VerticalAlignment="Top"
+            <ListBox Margin="6"
+                         VerticalAlignment="Top"
                          Grid.IsSharedSizeScope="True"
                          x:Name="RvConfigListBox" Grid.Row="1"
                          Grid.Column="0" BorderThickness="0" 
                          Background="Transparent"
                          ItemsSource="{Binding ListeRvConfig}"
                          SelectedItem="{Binding RvConfigSelectionne, Mode=TwoWay}">
-                    
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            
-                            <Border Margin="5,2" BorderThickness="2,0,0,0" BorderBrush="#69BDF4">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition  SharedSizeGroup="Nom" />
-                                        <ColumnDefinition  SharedSizeGroup="Adresse" />
-                                        <ColumnDefinition  SharedSizeGroup="port"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <TextBlock Grid.Column="0" Margin="10,0,0,0" Text="{Binding NomDuRover}" />
-                                    <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="{Binding AdresseIP}" />
-                                    <TextBlock Grid.Column="2" Margin="10,0,0,0" Text="{Binding PortTCP}" />
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Border>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border Margin="5,2" BorderThickness="2,0,0,0" BorderBrush="#69BDF4">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  SharedSizeGroup="Nom" />
+                                    <ColumnDefinition  SharedSizeGroup="Adresse" />
+                                    <ColumnDefinition  SharedSizeGroup="port"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Margin="10,0,0,0" Text="{Binding NomDuRover}" />
+                                <TextBlock Grid.Column="1" Margin="10,0,0,0" Text="{Binding AdresseIP}" />
+                                <TextBlock Grid.Column="2" Margin="10,0,0,0" Text="{Binding PortTCP}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Border>
 
         <Grid  Grid.Row="2">
             <Grid HorizontalAlignment="Stretch"
                   Margin="10,3">
                 <Button HorizontalAlignment="Right" Style="{StaticResource Base}"
-                    Command="{Binding SetSelectConfigCommand}" Click="ButtonExit_Click">
+                        Command="{Binding SetSelectConfigCommand}"
+                        CommandParameter="{Binding ElementName=Window_Selectionner_Config}">
                     <WrapPanel>
-                        <!--<Image Source="..\..\Images\Validation.png" 
-                           Stretch="Fill" RenderOptions.BitmapScalingMode="Fant"/>-->
                         <TextBlock VerticalAlignment="Center" Text="Selectionner"/>
                     </WrapPanel>
                 </Button>
-
                 <Button HorizontalAlignment="Left" Style="{StaticResource Base}"
                         Command="{Binding CancelCommand}"
-                        CommandParameter="{Binding ElementName=Select_une_configuration_Window}">
+                        CommandParameter="{Binding ElementName=Window_Selectionner_Config}">
                     <WrapPanel>
-                        <!--<Image Source="../../Images/Validation.png" 
-                               Stretch="Fill" RenderOptions.BitmapScalingMode="Fant"/>-->
                         <TextBlock VerticalAlignment="Center" Text="Annuler"/>
                     </WrapPanel>
                 </Button>

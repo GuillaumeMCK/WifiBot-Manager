@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>GestionnaireWifiBot</RootNamespace>
     <AssemblyName>GestionnaireWifiBot</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,6 +62,12 @@
     </ApplicationDefinition>
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Model\Config.cs" />
+    <Compile Include="User_Controls\ControleBoutonView.xaml.cs">
+      <DependentUpon>ControleBoutonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User_Controls\ControleJoystickView.xaml.cs">
+      <DependentUpon>ControleJoystickView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\ConfigRvViewModel.cs" />
     <Compile Include="ViewModel\ControleBoutonViewModel.cs" />
     <Compile Include="ViewModel\ControleVocaleViewModel.cs" />
@@ -68,12 +75,6 @@
     <Compile Include="ViewModel\PiloterRoverViewModel.cs" />
     <Compile Include="View\AddConfigView.xaml.cs">
       <DependentUpon>AddConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User_Controls\ControleBoutonView.xaml.cs">
-      <DependentUpon>ControleBoutonView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User_Controls\ControleJoystickView.xaml.cs">
-      <DependentUpon>ControleJoystickView.xaml</DependentUpon>
     </Compile>
     <Compile Include="User_Controls\ControleVocaleView.xaml.cs">
       <DependentUpon>ControleVocaleView.xaml</DependentUpon>
@@ -90,15 +91,15 @@
     <Compile Include="User_Controls\Base\Joystick.xaml.cs">
       <DependentUpon>Joystick.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AddConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="User_Controls\ControleBoutonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User_Controls\ControleJoystickView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,7 +13,6 @@ namespace GestionnaireWifiBot.Model
         public string NomDuRover { get; set; }
         public string AdresseIP { get; set; }
         public int PortTCP { get; set; }
-
     }
 
     [Serializable]

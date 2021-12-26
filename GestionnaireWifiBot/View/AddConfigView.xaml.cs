@@ -33,16 +33,6 @@ namespace GestionnaireWifiBot.View
                 this.DragMove();
         }
 
-        private void ButtonExit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
         private void RegexPreviewIpTextbox(object sender, TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9.]+").IsMatch(e.Text);

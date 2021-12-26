@@ -34,15 +34,5 @@ namespace GestionnaireWifiBot.ViewModel
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
         }
-
-        private void ButtonExit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
-        }
     }
 }

@@ -29,12 +29,13 @@ namespace GestionnaireWifiBot.ViewModel
                 OnPropertyChanged(nameof(CurrentRvConfig));
             }
         }
-        bool _isBlur;
+        bool isBlur;
         public bool IsBlur
         {
-            get { return _isBlur; }
-            set {
-                _isBlur = value;
+            get { return isBlur; }
+            set
+            {
+                isBlur = value;
                 OnPropertyChanged(nameof(IsBlur));
             }
         }
@@ -48,7 +49,6 @@ namespace GestionnaireWifiBot.ViewModel
 
         //----------------------------------------------
         // COMMANDS
-        public ICommand SaveRoversConfigsCommand { get; set; }
         public ICommand OpenAddConfigViewCommand { get; set; }
         public ICommand OpenDelConfigViewCommand { get; set; }
         public ICommand OpenSelConfigViewCommand { get; set; }
@@ -60,7 +60,10 @@ namespace GestionnaireWifiBot.ViewModel
         {
             listeRvConfig = new ObservableCollection<Config>(GetBackupRoverList());
 
-            SaveRoversConfigsCommand = new BaseCommand(o => SaveRoverConfigs(new List<Config>(listeRvConfig)));
+            CloseWindowCommand = new BaseCommand(o => {
+                SaveRoverConfigs(new List<Config>(listeRvConfig));
+                ((Window)o).Close();
+            });
             OpenAddConfigViewCommand = new BaseCommand(o => OpenAddConfigView());
             OpenDelConfigViewCommand = new BaseCommand(o => OpenDelConfigView());
             OpenSelConfigViewCommand = new BaseCommand(o => OpenSelConfigView());
@@ -94,7 +97,7 @@ namespace GestionnaireWifiBot.ViewModel
         {
             addConfigView = new AddConfigView(); 
             addConfigView.ShowDialog();
-            if (!ConfigRvViewModel.annuler)
+            if (ConfigRvViewModel.annuler ==  false)
                 listeRvConfig = ConfigRvViewModel.listeRvConfig;
         }
 
@@ -104,7 +107,7 @@ namespace GestionnaireWifiBot.ViewModel
             {
                 selConfigView = new SelConfigView();
                 selConfigView.ShowDialog();
-                if (ConfigRvViewModel.annuler == false)
+                if (ConfigRvViewModel.annuler == false && ConfigRvViewModel.rvConfigSelectionne != null)
                     CurrentRvConfig = new Config
                     {
                         NomDuRover = ConfigRvViewModel.rvConfigSelectionne.NomDuRover,
@@ -142,7 +145,6 @@ namespace GestionnaireWifiBot.ViewModel
         /// SERIALISATION
         private void SaveRoverConfigs(List<Config> _configs)
         {
-
             BackupConfigs backupRoversConfigs = new BackupConfigs();
 
             backupRoversConfigs.ConfigsList = _configs;
@@ -156,7 +158,6 @@ namespace GestionnaireWifiBot.ViewModel
         private List<Config> GetBackupRoverList()
         {
             BackupConfigs backupConfigList = new BackupConfigs() ;
-
             try
             {
                 FileStream fichier = new FileStream("save.bin", FileMode.Open);
@@ -168,7 +169,6 @@ namespace GestionnaireWifiBot.ViewModel
             {
                 return new List<Config>();
             }
-
             return backupConfigList.ConfigsList;
         }
     }
