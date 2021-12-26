@@ -29,6 +29,15 @@ namespace GestionnaireWifiBot.ViewModel
                 OnPropertyChanged(nameof(CurrentRvConfig));
             }
         }
+        bool _isBlur;
+        public bool IsBlur
+        {
+            get { return _isBlur; }
+            set {
+                _isBlur = value;
+                OnPropertyChanged(nameof(IsBlur));
+            }
+        }
         public static ObservableCollection<Config> listeRvConfig { get; set; }
 
         // VIEWS
@@ -55,7 +64,7 @@ namespace GestionnaireWifiBot.ViewModel
             OpenAddConfigViewCommand = new BaseCommand(o => OpenAddConfigView());
             OpenDelConfigViewCommand = new BaseCommand(o => OpenDelConfigView());
             OpenSelConfigViewCommand = new BaseCommand(o => OpenSelConfigView());
-            OpenPiloteRoverViewCommand = new BaseCommand(o => OpenPiloteRoverView());
+            OpenPiloteRoverViewCommand = new BaseCommand(o => { IsBlur = true; OpenPiloteRoverView(); IsBlur = false; });
         }
 
         //----------------------------------------------

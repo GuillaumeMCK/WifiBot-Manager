@@ -50,9 +50,9 @@ namespace GestionnaireWifiBot.ViewModel
         {
             //On construit le dictionnaire des mots à reconnaitre, ceux qui ne figurent pas dans cette liste ne seront pas reconnus
             MouvementChoisie = new Choices(
-                "Avancer normalement", "Avancer rapidement", "Avancer à droite", "Avancer à gauche",
+                "Avancer normalement", "Avancer doucement", "Avancer à droite", "Avancer à gauche",
                 "Rotation à droite", "Rotation à gauche", "Arrêt",
-                "Reculer normalement", "Reculer rapidement", "Reculer à droite", "Reculer à gauche"
+                "Reculer normalement", "Reculer doucement", "Reculer à droite", "Reculer à gauche"
             );
             //On implante le dictionnaire dans le moteur de reconnaissance en utilisant un GrammarBuilder
             ContraintesReconnaissance = new GrammarBuilder(MouvementChoisie);
@@ -99,9 +99,9 @@ namespace GestionnaireWifiBot.ViewModel
                     L = 100;
                     R = 100;
                     break;
-                case "Avancer rapidement":
+                case "Avancer doucement":
                     ActionVocaleIndexListe = 2;
-                    vitesse = 40;
+                    vitesse = 10;
                     L = 100;
                     R = 100;
                     break;
@@ -135,9 +135,9 @@ namespace GestionnaireWifiBot.ViewModel
                     L = -100;
                     R = -100;
                     break;
-                case "Reculer rapidement":
+                case "Reculer doucement":
                     ActionVocaleIndexListe = 8;
-                    vitesse = 40;
+                    vitesse = 10;
                     L = -100;
                     R = -100;
                     break;

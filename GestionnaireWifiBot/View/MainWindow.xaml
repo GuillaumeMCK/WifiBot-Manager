@@ -12,24 +12,38 @@
         AllowsTransparency="True"
         ResizeMode="NoResize"
         Title="Gestionnaire WIFIBOT">
-
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsBlur, Mode=OneWay}" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <BlurEffect/>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        
         <Border Grid.ColumnSpan="2"
                 Background="#202225"
                 MouseDown="Border_MouseDown">
-            <Grid HorizontalAlignment="Stretch">
+
+                <Grid HorizontalAlignment="Stretch">
                 <Border VerticalAlignment="Top" 
                             HorizontalAlignment="Left"
                             Background="#fff"
                             Padding="5,1"
                             CornerRadius="0,0,7,0">
                     <WrapPanel>
-                        <Image Source="..\Images\logo.png" Height="14" Width="14" Margin="0,0,5,0"/>
+                        <Image Source="/logo.ico" Height="14" Width="14" Margin="0,0,5,0"/>
                         <TextBlock Foreground="#70AD47" TextAlignment="Center">
                               <TextBlock FontFamily="Poppins" 
                                          FontWeight="Medium" 

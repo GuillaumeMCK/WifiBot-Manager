@@ -56,7 +56,7 @@
                                         BorderBrush="CadetBlue" BorderThickness="1" Background="#fff" CornerRadius="7">
                         <Image Source="..\Images\buttons\pad_arrow_up.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Border>
-                    <TextBlock Margin="4,0" Text="Avancer rapidement"/>
+                    <TextBlock Margin="4,0" Text="Avancer doucement"/>
                 </WrapPanel>
             </ListBoxItem>
             <ListBoxItem>
@@ -112,7 +112,7 @@
                             Background="#fff" CornerRadius="7">
                         <Image Source="..\Images\buttons\pad_arrow_down.png" RenderOptions.BitmapScalingMode="Fant"/>
                     </Border>
-                    <TextBlock Margin="4,0" Text="Reculer rapidement"/>
+                    <TextBlock Margin="4,0" Text="Reculer doucement"/>
                 </WrapPanel>
             </ListBoxItem>
             <ListBoxItem>
