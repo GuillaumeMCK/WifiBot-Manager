@@ -7,8 +7,8 @@
     
     <Application.Resources>
         <ResourceDictionary>
-            <SolidColorBrush x:Key="MainColor">#80b85c</SolidColorBrush>
-            <SolidColorBrush x:Key="ColorOptAff">#8FC7F1</SolidColorBrush>
+            <!--<SolidColorBrush x:Key="MainColor">#80b85c</SolidColorBrush>
+            <SolidColorBrush x:Key="ColorOptAff">#8FC7F1</SolidColorBrush>-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Button_ControlBox.xaml"/>
                 <ResourceDictionary Source="Themes/Button_Base.xaml"/>

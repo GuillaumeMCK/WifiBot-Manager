@@ -138,7 +138,6 @@ namespace GestionnaireWifiBot.ViewModel
                     "Opération impossible !",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
-                annuler = true;
             }
         }
     }
