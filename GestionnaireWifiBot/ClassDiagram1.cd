@@ -56,7 +56,7 @@
   <Class Name="GestionnaireWifiBot.View.AddConfigView" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="2.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAECAAAAAAAAAACAAAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAECAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\AddConfigView.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -64,7 +64,7 @@
   <Class Name="GestionnaireWifiBot.View.DelConfigView" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABCAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\DelConfigView.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -72,7 +72,7 @@
   <Class Name="GestionnaireWifiBot.View.PiloterRoverView" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="4.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAACCAAAAACAoAAAAAAAAAAEAAARAAAAAAAQ=</HashCode>
+      <HashCode>AAACAAAAAACCAAAAACAoAAAAAAAAAAEAAABAAAAAAAA=</HashCode>
       <FileName>View\PiloterRoverView.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -80,7 +80,7 @@
   <Class Name="GestionnaireWifiBot.View.SelConfigView" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="1" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\SelConfigView.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -88,15 +88,15 @@
   <Class Name="GestionnaireWifiBot.ViewModel.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="1" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.BaseViewModel">
-    <Position X="8.75" Y="2" Width="3.5" />
+    <Position X="8.75" Y="1.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAAAIAAAAAAAoAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAACAAAAAAAAIAAAAAAAoAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\BaseViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -104,7 +104,7 @@
   <Class Name="GestionnaireWifiBot.ViewModel.ConfigRvViewModel">
     <Position X="4.75" Y="5.25" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAEABCgBABAgAAAQAAgoAAAAAABAAQABQQAAAA=</HashCode>
+      <HashCode>QAQAAAAEABCgAABAgAAAQAAgoAAAAAABBAQABQQAAAE=</HashCode>
       <FileName>ViewModel\ConfigRvViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -132,14 +132,14 @@
   <Class Name="GestionnaireWifiBot.ViewModel.HomeViewModel">
     <Position X="0.75" Y="5.25" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAIAACAAgAAAEBgBAMCAAAEQQAIAAAQEAAEAAIAAAQ=</HashCode>
+      <HashCode>AAAIAAAAAgAAAAJgBAMCAAAEQQAIAAAQEAAEAAIAAAQ=</HashCode>
       <FileName>ViewModel\HomeViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.PiloterRoverViewModel">
     <Position X="13" Y="5.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAACIAAAAAgAAAAAAAAAABAAAAAAAA=</HashCode>
+      <HashCode>AACAAAAAAAAAAAAACAAAAAAgAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>ViewModel\PiloterRoverViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>

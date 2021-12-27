@@ -30,6 +30,9 @@ namespace GestionnaireWifiBot.Model
             connected = false;
         }
 
+        //----------------------------------------------------
+        // Méthode de connexion au rover
+        //----------------------------------------------------
         public void Connection()
         {
             if (!connected)
