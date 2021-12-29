@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="GestionnaireWifiBot.Model.ConfigsBackup">
-    <Position X="7.5" Y="4.25" Width="2.25" />
+    <Position X="7.5" Y="6.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Config.cs</FileName>
@@ -9,24 +9,10 @@
   </Class>
   <Class Name="GestionnaireWifiBot.Model.Rover">
     <Position X="3.5" Y="4" Width="3" />
-    <AssociationLine Name="clientSocket" Type="System.Net.Sockets.TcpClient">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-7.756" Y="-0.599" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="networkStream" Type="System.Net.Sockets.NetworkStream">
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-9.434" Y="-0.356" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAQAAABAAAAAAAEAIAAEABIAAAQAAAAAAAAAAAAAIAE=</HashCode>
       <FileName>Model\Rover.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="clientSocket" />
-      <Field Name="networkStream" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="GestionnaireWifiBot.User_Controls.Base.Joystick" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="21" Y="5.5" Width="1.5" />
@@ -101,7 +87,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.BaseViewModel">
-    <Position X="11.5" Y="5.5" Width="3.5" />
+    <Position X="11.5" Y="5.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAACAAAAAAAAIAAAAAAAoAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\BaseViewModel.cs</FileName>
@@ -145,32 +131,26 @@
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.PiloterRoverViewModel">
     <Position X="15.75" Y="8.75" Width="2.75" />
-    <AssociationLine Name="rover" Type="GestionnaireWifiBot.Model.Rover" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="16.5" Y="8.75" />
-        <Point X="16.5" Y="4.084" />
-        <Point X="6.5" Y="4.084" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="5.258" Y="1.59" />
-      </MemberNameLabel>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAACAAAAAAgAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>ViewModel\PiloterRoverViewModel.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="rover" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="System.Net.Sockets.NetworkStream" Collapsed="true">
     <Position X="3.75" Y="2" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="System.Net.Sockets.TcpClient" Collapsed="true">
-    <Position X="5.5" Y="2" Width="1.5" />
+    <Position X="5.5" Y="2.25" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GestionnaireWifiBot.Model.Config">
+    <Position X="7.5" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Config.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
