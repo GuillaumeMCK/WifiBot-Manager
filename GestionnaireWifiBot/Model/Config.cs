@@ -16,7 +16,7 @@ namespace GestionnaireWifiBot.Model
     }
 
     [Serializable]
-    class BackupConfigs
+    class ConfigsBackup
     {
         public List<Config> ConfigsList { get; set; }
     }

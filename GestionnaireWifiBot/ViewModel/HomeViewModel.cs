@@ -21,15 +21,38 @@ namespace GestionnaireWifiBot.ViewModel
     {
         //----------------------------------------------
         // ATTRIBUTS
+        bool isBlur;
+        static ConfigsBackup configsBackup;
         public static Config currentRvConfig;
-        public Config CurrentRvConfig {
+
+        // VIEWS
+        AddConfigView addConfigView;
+        DelConfigView delConfigView;
+        SelConfigView selConfigView;
+        PiloterRoverView piloterRoverView;
+
+        //----------------------------------------------
+        // PROPERTY
+        public static List<Config> listeRvConfig
+        {
+            get
+            {
+                return configsBackup.ConfigsList;
+            }
+            set
+            {
+                configsBackup.ConfigsList = value;
+            }
+        }
+        public Config CurrentRvConfig
+        {
             get { return currentRvConfig; }
-            set {
+            set
+            {
                 currentRvConfig = value;
                 OnPropertyChanged(nameof(CurrentRvConfig));
             }
         }
-        bool isBlur;
         public bool IsBlur
         {
             get { return isBlur; }
@@ -39,15 +62,6 @@ namespace GestionnaireWifiBot.ViewModel
                 OnPropertyChanged(nameof(IsBlur));
             }
         }
-        public static ObservableCollection<Config> listeRvConfig { get; set; }
-
-        // VIEWS
-        AddConfigView addConfigView;
-        DelConfigView delConfigView;
-        SelConfigView selConfigView;
-        PiloterRoverView piloterRoverView;
-
-        //----------------------------------------------
         // COMMANDS
         public ICommand OpenAddConfigViewCommand { get; set; }
         public ICommand OpenDelConfigViewCommand { get; set; }
@@ -58,10 +72,11 @@ namespace GestionnaireWifiBot.ViewModel
         // CONSTRUCTOR
         public HomeViewModel()
         {
-            listeRvConfig = new ObservableCollection<Config>(GetBackupRoverList());
+            GetBackup(out configsBackup);
+            listeRvConfig = configsBackup.ConfigsList;
 
             CloseWindowCommand = new BaseCommand(o => {
-                SaveRoverConfigs(new List<Config>(listeRvConfig));
+                Backup(configsBackup);
                 ((Window)o).Close();
             });
             OpenAddConfigViewCommand = new BaseCommand(o => OpenAddConfigView());
@@ -72,13 +87,12 @@ namespace GestionnaireWifiBot.ViewModel
 
         //----------------------------------------------
         // METHODE
-        /// GESTION DES ROVERS
         private void OpenPiloteRoverView()
         {
             if (currentRvConfig!=null)
             {
                 piloterRoverView = new PiloterRoverView();
-                try // Mhhh...
+                try // ...Permet d'eviter lorsque le fenetre est avortée dans le contructeur -> rover inaccessible
                 {
                     piloterRoverView.ShowDialog();
                 }
@@ -92,13 +106,13 @@ namespace GestionnaireWifiBot.ViewModel
                                 MessageBoxImage.Information);
             }
         }
-
+        //new ObservableCollection<Config>
         private void OpenAddConfigView()
         {
             addConfigView = new AddConfigView(); 
             addConfigView.ShowDialog();
-            if (ConfigRvViewModel.annuler ==  false)
-                listeRvConfig = ConfigRvViewModel.listeRvConfig;
+            if (ConfigRvViewModel.operation_canceled ==  false)
+                listeRvConfig = ConfigRvViewModel.listeRvConfig.ToList<Config>();
         }
 
         private void OpenSelConfigView()
@@ -107,7 +121,7 @@ namespace GestionnaireWifiBot.ViewModel
             {
                 selConfigView = new SelConfigView();
                 selConfigView.ShowDialog();
-                if (ConfigRvViewModel.annuler == false && ConfigRvViewModel.rvConfigSelectionne != null)
+                if (ConfigRvViewModel.operation_canceled == false && ConfigRvViewModel.rvConfigSelectionne != null)
                     CurrentRvConfig = new Config
                     {
                         NomDuRover = ConfigRvViewModel.rvConfigSelectionne.NomDuRover,
@@ -130,8 +144,8 @@ namespace GestionnaireWifiBot.ViewModel
             {
                 delConfigView = new DelConfigView();
                 delConfigView.ShowDialog();
-                if (!ConfigRvViewModel.annuler)
-                    listeRvConfig = ConfigRvViewModel.listeRvConfig;
+                if (!ConfigRvViewModel.operation_canceled)
+                    listeRvConfig = ConfigRvViewModel.listeRvConfig.ToList<Config>();
             }
             else
             {
@@ -143,33 +157,30 @@ namespace GestionnaireWifiBot.ViewModel
         }
 
         /// SERIALISATION
-        private void SaveRoverConfigs(List<Config> _configs)
+        private void Backup(ConfigsBackup configs)
         {
-            BackupConfigs backupRoversConfigs = new BackupConfigs();
-
-            backupRoversConfigs.ConfigsList = _configs;
-
             FileStream fichier = new FileStream("save.bin", FileMode.Create);
             
             BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(fichier, backupRoversConfigs);
+            bf.Serialize(fichier, configs);
             fichier.Close();
         }
-        private List<Config> GetBackupRoverList()
+
+        private void GetBackup(out ConfigsBackup configs)
         {
-            BackupConfigs backupConfigList = new BackupConfigs() ;
+            configs = new ConfigsBackup();
+            configs.ConfigsList = new List<Config>();
             try
             {
                 FileStream fichier = new FileStream("save.bin", FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
-                backupConfigList = (BackupConfigs)bf.Deserialize(fichier);
+                configs = (ConfigsBackup)bf.Deserialize(fichier);
                 fichier.Close();
             }
             catch
             {
-                return new List<Config>();
+                Console.WriteLine("Aucun fichier de serialisation trouvé");
             }
-            return backupConfigList.ConfigsList;
         }
     }
 }

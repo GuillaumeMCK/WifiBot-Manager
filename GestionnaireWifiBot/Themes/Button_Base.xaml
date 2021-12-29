@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:GestionnaireWifiBot.Themes">
     <Style TargetType="{x:Type Button}" x:Key="Base" >
-        <Setter Property="Background" Value="#f0f0f0"/>
+        <Setter Property="Background" Value="#ededed"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Foreground" Value="#2f2f2f"/>
         <Setter Property="FontFamily" Value="Poppins"/>
@@ -27,7 +27,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background"  Value="#ededed"/>
+                <Setter Property="Background"  Value="#ddd"/>
                 <Setter Property="Foreground" Value="#0f0f0f"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="BorderBrush" Value="blue"/>

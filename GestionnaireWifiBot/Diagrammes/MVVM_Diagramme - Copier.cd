@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="GestionnaireWifiBot.Model.Rover">
+    <Position X="7.25" Y="2.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAAAAAAEAIAAEABIAAAQAAAAAAAAAAAAAIAE=</HashCode>
+      <FileName>Model\Rover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

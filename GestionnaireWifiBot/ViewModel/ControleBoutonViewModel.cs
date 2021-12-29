@@ -7,17 +7,21 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GestionnaireWifiBot.Commands;
-using GestionnaireWifiBot.Model;
 
 namespace GestionnaireWifiBot.ViewModel
 {
     class ControleBoutonViewModel : PiloterRoverViewModel
     {
-        public static bool CommandLoopActivated;
-        Task roverTask;
-        int L = 0;
-        int R = 0;
-        int vitesse;
+        //----------------------------------------------
+        // ATTRIBUTS
+        Task roverTask;                          // Tache asynchrone pour l'envoie des valeurs au rovers
+        public static bool CommandLoopActivated; // Permet de mettre en pause la tache "roverTask" 
+        int vitesse;            // definit la vitesse du rover 0 - 40
+        int L_Speed_Ratio = 0;  // Ratio des roues gauche
+        int R_Speed_Ratio = 0;  // Ratio des roues droite
+
+        //----------------------------------------------
+        // PROPERTYS
         public int SliderValue
         {
             get { return vitesse; }
@@ -28,6 +32,7 @@ namespace GestionnaireWifiBot.ViewModel
             }
         }
 
+        // COMMANDS
         public ICommand UpPadButtonCommand { get; }
         public ICommand UpRightPadButtonCommand { get; }
         public ICommand UpLeftPadButtonCommand { get; }
@@ -38,54 +43,54 @@ namespace GestionnaireWifiBot.ViewModel
         public ICommand DownRightPadButtonCommand { get; }
         public ICommand DownLeftPadButtonCommand { get; }
 
+        //----------------------------------------------
+        // CONSTRUCTOR
         public ControleBoutonViewModel()
         {
-            StopPadButtonCommand = new BaseCommand(o => { L = 0; R = 0; });
+            StopPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = 0; R_Speed_Ratio = 0; });
 
-            UpPadButtonCommand = new BaseCommand(o => { L = 100; R = 100; });
-            DownPadButtonCommand = new BaseCommand(o => { L = -100; R = -100; });
-            LeftPadButtonCommand = new BaseCommand(o => { L = -50; R = 50; });
-            RightPadButtonCommand = new BaseCommand(o => { L = 50; R = -50; });
+            UpPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = 100; R_Speed_Ratio = 100; });
+            DownPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = -100; R_Speed_Ratio = -100; });
+            LeftPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = -50; R_Speed_Ratio = 50; });
+            RightPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = 50; R_Speed_Ratio = -50; });
 
-            UpRightPadButtonCommand = new BaseCommand(o => { L = 100; R = 75; });
-            UpLeftPadButtonCommand = new BaseCommand(o => { L = 75; R = 100; });
-            DownRightPadButtonCommand = new BaseCommand(o => { L = -100; R = -75; });
-            DownLeftPadButtonCommand = new BaseCommand(o => { L = -75; R = -100; });
+            UpRightPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = 100; R_Speed_Ratio = 75; });
+            UpLeftPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = 75; R_Speed_Ratio = 100; });
+            DownRightPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = -100; R_Speed_Ratio = -75; });
+            DownLeftPadButtonCommand = new BaseCommand(o => { L_Speed_Ratio = -75; R_Speed_Ratio = -100; });
 
-            roverTask = new Task(() => SendCommand2Rover());
+            roverTask = new Task(() => SendValues());
 
             roverTask.Start();
         }
 
-        void SendCommand2Rover()
+        //----------------------------------------------
+        // METHODES
+        void SendValues()
         {
-            byte RTrame;
-            byte LTrame;
-            int normR;
-            int normL;
+            int R, L;
+            byte RTrame, LTrame;
+
+            // Arret de la boucle lorsque le ConnectionState du rover est sur false
             while (rover.ConnectionState != false)
             {
+                // Pause de la boucle quand la window n'est pas active
                 while (!CommandLoopActivated && rover.ConnectionState == true)
-                {
-                    Console.WriteLine("Waiting Button Control Loop...");
                     Thread.Sleep(1000);
-                }
+                //-------------------------------------------
+                // Calcule des valeurs Left et Right a partir de la vitesse
+                R = (int)Math.Abs(Math.Round(vitesse * (R_Speed_Ratio / 100f)));
+                L = (int)Math.Abs(Math.Round(vitesse * (L_Speed_Ratio / 100f)));
 
-                normR = (int)Math.Abs(Math.Round(vitesse * (R / 100.0)));
-                normL = (int)Math.Abs(Math.Round(vitesse * (L / 100.0)));
+                // Definition de la trame selon les valeurs obtenues
+                if (R_Speed_Ratio >= 0) RTrame = ValeursAvancer[R];
+                else RTrame = ValeursReculer[R];
 
-                if (R >= 0)
-                    RTrame = ValeursAvancer[normR];
-                else
-                    RTrame = ValeursReculer[normR];
-                if (L >= 0)
-                    LTrame = ValeursAvancer[normL];
-                else
-                    LTrame = ValeursReculer[normL];
-
-                //Console.WriteLine( L + " : " + normL + "  "+ R +" : " + normR);
-
+                if (L_Speed_Ratio >= 0) LTrame = ValeursAvancer[Math.Abs(L)];
+                else LTrame = ValeursReculer[L];
+                // Envoi de la trame au rover
                 rover.Commander(new byte[] { LTrame, RTrame });
+                // Temporisation
                 Thread.Sleep(200);
             };
             

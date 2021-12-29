@@ -17,8 +17,16 @@ namespace GestionnaireWifiBot.ViewModel
     {
         //---------------------------------
         // ATTRIBUTS
-        public static bool annuler { get; set; } 
         public static ObservableCollection<Config> listeRvConfig;
+        // Rover avec des parametres valides ( Valeurs par défaut )
+        string rvConfig_Nom = "Rover";
+        string rvConfig_IP  = "127.0.0.1";
+        int rvConfig_Port   = 15020;
+        // Rover Selectionne
+        public static Config rvConfigSelectionne;
+
+        //----------------------------------------------
+        // PROPERTYS
         public ObservableCollection<Config> ListeRvConfig
         {
             get { return listeRvConfig; }
@@ -29,15 +37,11 @@ namespace GestionnaireWifiBot.ViewModel
             }
         }
         public Config rvConfig { get; set; }
-
-        // Rover avec des parametres valides
-        string rvConfig_Nom = "Rover";
         public string RvConfig_Nom
         {
             get { return rvConfig_Nom; }
             set { rvConfig_Nom = value; }
         }
-        string rvConfig_IP = "127.0.0.1";
         public string RvConfig_IP
         {
             get { return rvConfig_IP; }
@@ -50,7 +54,6 @@ namespace GestionnaireWifiBot.ViewModel
                     Console.WriteLine("IP Invalide");
             }
         }
-        int rvConfig_Port = 15020;
         public int RvConfig_Port
         {
             get { return rvConfig_Port; }
@@ -62,9 +65,6 @@ namespace GestionnaireWifiBot.ViewModel
                     Console.WriteLine("Port Invalide");
             }
         }
-
-        // Rover Selectionne
-        public static Config rvConfigSelectionne;
         public Config RvConfigSelectionne
         {
             get { return rvConfigSelectionne; }
@@ -74,7 +74,9 @@ namespace GestionnaireWifiBot.ViewModel
                 OnPropertyChanged(nameof(RvConfigSelectionne));
             }
         }
+        public static bool operation_canceled { get; set; }
 
+        // COMMANDS
         public ICommand AddConfigCommand { get; set; }
         public ICommand DeleteConfigCommand { get; set; }
         public ICommand SetSelectConfigCommand { get; set; }
@@ -83,13 +85,13 @@ namespace GestionnaireWifiBot.ViewModel
         public ConfigRvViewModel()
         {
             listeRvConfig = new ObservableCollection<Config>(HomeViewModel.listeRvConfig);
-            rvConfig = new Config(); // { NomDuRover = "Rover", AdresseIP = "127.0.0.1", PortTCP = 15020 };
-            annuler = false;
+            rvConfig = new Config(); 
+            operation_canceled = false;
 
             AddConfigCommand       = new BaseCommand(o => AddConfig());
             DeleteConfigCommand    = new BaseCommand(o => DeleteConfig());
             SetSelectConfigCommand = new BaseCommand(o => SetCurrentRvConfig());
-            CancelCommand          = new BaseCommand(o => { annuler = true; ((Window)o).Close();});
+            CancelCommand          = new BaseCommand(o => { operation_canceled = true; ((Window)o).Close();});
         }
 
         private void DeleteConfig()
@@ -110,7 +112,7 @@ namespace GestionnaireWifiBot.ViewModel
             if (RvConfigSelectionne != null)
             {
                 rvConfig = RvConfigSelectionne;
-                annuler = false;
+                operation_canceled = false;
             }
             else
             {
@@ -118,10 +120,9 @@ namespace GestionnaireWifiBot.ViewModel
                                 "Opération impossible !",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
-                annuler = true;
+                operation_canceled = true;
             }
         }
-        
 
         private void AddConfig()
         {
@@ -130,14 +131,14 @@ namespace GestionnaireWifiBot.ViewModel
                                            item.PortTCP == rvConfig_Port))
             {
                 ListeRvConfig.Add(new Config() { NomDuRover = rvConfig_Nom, AdresseIP = rvConfig_IP, PortTCP=rvConfig_Port });
-                annuler = false;
+                operation_canceled = false;
             }
             else
             {
                 MessageBox.Show("Cette configuration existe deja !",
-                    "Opération impossible !",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                                "Opération impossible !",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
             }
         }
     }

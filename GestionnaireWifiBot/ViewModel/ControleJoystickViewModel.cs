@@ -11,12 +11,15 @@ namespace GestionnaireWifiBot.ViewModel
 {
     class ControleJoystickViewModel : PiloterRoverViewModel
     {
-        Task roverTask;
-        public static bool CommandLoopActivated;
+        //----------------------------------------------
+        // ATTRIBUTS
+        Task roverTask;                          // Tache asynchrone pour l'envoie des valeurs au rovers
+        public static bool CommandLoopActivated; // Permet de mettre en pause la tache "roverTask" 
+        double x;   // Valeur de l'abscisse du joystick
+        double y;   // Valeur de l'ordonnée du joystick
 
-        double x;
-        double y;
-        
+        //----------------------------------------------
+        // PROPERTYS
         public double X
         {
             get { return x; }
@@ -36,59 +39,51 @@ namespace GestionnaireWifiBot.ViewModel
             }
         }
 
+        //----------------------------------------------
+        // CONSTRUCTOR
         public ControleJoystickViewModel()
         {
-            roverTask = new Task(() => SendJstkVals2Rover());
-
+            roverTask = new Task(() => SendValues());
             roverTask.Start();
         }
 
-
-        void SendJstkVals2Rover()
+        //----------------------------------------------
+        // METHODES
+        void SendValues() // Permet d'envoyer les valeurs du joystick au rover
         {
             double x_, y_;
-            double V;
-            double W;
-            double R, L;
-            int normR, normL;
+            double V, W;
+            int R, L;
             byte RTrame, LTrame;
 
+            // Arret de la boucle lorsque le ConnectionState du rover est sur false
             while (rover.ConnectionState != false)
             {
+                // Pause de la boucle quand la window n'est pas active
                 while (!CommandLoopActivated && rover.ConnectionState == true)
-                {
-                    Console.WriteLine("Waiting Joystick Control Loop...");
                     Thread.Sleep(1000);
-                }
-
-                x_ = -X * 100;
-                y_ = -Y * 100;
+                //-------------------------------------------
+                // Calcule des valeurs Left et Right du rover
+                // Invertion des valeurs X Y
+                x_ = -X;
+                y_ = -Y;
                 // Calcule de L+R
-                V = (100 - Math.Abs(x_)) * (y_ / 100) + y_;
+                V = (1 - Math.Abs(x_)) * y_ + y_;
                 // Calcule de R-L
-                W = (100 - Math.Abs(y_)) * (x_ / 100) + x_;
-                // Calcule de R
-                R = (V + W) / 2;
-                // Calcule de L
-                L = (V - W) / 2;
+                W = (1 - Math.Abs(y_)) * x_ + x_;
+                // Calcule de R sur 40
+                R = (int)Math.Round(((V + W) / 2f) * 40);
+                // Calcule de L sur 40
+                L = (int)Math.Round(((V - W) / 2f) * 40);
+                // Definition de la trame selon les valeurs obtenues
+                if (R >= 0) RTrame = ValeursAvancer[Math.Abs(R)];
+                else RTrame = ValeursReculer[Math.Abs(R)];
 
-                // Normalisation des valeurs
-                normR = (int)Math.Abs(Math.Round(R / 2));
-                if (normR > 40) normR = 40;
-                normL = (int)Math.Abs(Math.Round(L / 2));
-                if (normL > 40) normL = 40;
-
-                // Envoi de la trame selon les valeurs obtenues
-                if (R >= 0)
-                    RTrame = ValeursAvancer[normR];
-                else
-                    RTrame = ValeursReculer[normR];
-                if (L >= 0)
-                    LTrame = ValeursAvancer[normL];
-                else
-                    LTrame = ValeursReculer[normL];
-
+                if (L >= 0) LTrame = ValeursAvancer[Math.Abs(L)];
+                else LTrame = ValeursReculer[Math.Abs(L)];
+                // Envoi de la trame au rover
                 rover.Commander(new byte[] { LTrame, RTrame });
+                // Temporisation
                 Thread.Sleep(200);
             };
             roverTask.Wait();
