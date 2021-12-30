@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using GestionnaireWifiBot.Commands;
+﻿using GestionnaireWifiBot.Commands;
 using GestionnaireWifiBot.Model;
-using System.Net;
-using System.Text.RegularExpressions;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net;
 using System.Windows;
+using System.Windows.Input;
 
 namespace GestionnaireWifiBot.ViewModel
 {

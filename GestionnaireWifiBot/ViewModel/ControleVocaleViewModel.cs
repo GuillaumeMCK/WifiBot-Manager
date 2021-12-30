@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Speech;
 using System.Speech.Recognition;
-using GestionnaireWifiBot.Model;
 using System.Windows;
-using System.Threading;
-using System.Windows.Input;
-using GestionnaireWifiBot.Commands;
 
 namespace GestionnaireWifiBot.ViewModel
 {
@@ -17,15 +8,10 @@ namespace GestionnaireWifiBot.ViewModel
     {
         //----------------------------------------------
         // ATTRIBUTS
-        Task roverTask;                          // Tache asynchrone pour l'envoie des valeurs au rovers
-        public static bool CommandLoopActivated; // Permet de mettre en pause la tache "roverTask" 
-                                                 //   lorsque la window n'est pas active
-        int L_Speed_Ratio = 0;         // Ratio de rotation des roues gauches
-        int R_Speed_Ratio = 0;         // Ratio de rotation des roues droite
-        int vitesse = 0;   // Definit la vitesse du rover (0 - 40)
+        int vitesse = 0;           // Definit la vitesse du rover (0 - 40)
         int selectedItemIndex = 0; // Index de l'element selectionné par défaut
-        string mot_reconnu;  
-        SpeechRecognitionEngine MoteurReconnaissance;
+        string mot_reconnu;        // permet de stocker le mot reconnu
+        SpeechRecognitionEngine MoteurReconnaissance; 
         Choices MouvementChoisie;
         GrammarBuilder ContraintesReconnaissance;
         Grammar MotsAReconnaitre;
@@ -81,8 +67,6 @@ namespace GestionnaireWifiBot.ViewModel
             {
                 MoteurReconnaissance.SetInputToDefaultAudioDevice();        //Capture l'entrée audio par défaut
                 MoteurReconnaissance.RecognizeAsync(RecognizeMode.Multiple);
-                roverTask = new Task(() => SendValues());
-                roverTask.Start();
             }
             catch
             {
@@ -92,36 +76,24 @@ namespace GestionnaireWifiBot.ViewModel
 
         //----------------------------------------------
         // METHODES
-        void SendValues()
+        void SendValues(int L_Speed_Ratio, int R_Speed_Ratio)
         {
             int R, L;
             byte RTrame, LTrame;
 
-            // Arret de la boucle lorsque le ConnectionState du rover est sur false
-            while (rover.ConnectionState != false)
-            {
-                // Pause de la boucle quand la window n'est pas active
-                while (!CommandLoopActivated && rover.ConnectionState == true)
-                    Thread.Sleep(1000);
-                //-------------------------------------------
-                // Calcule des valeurs Left et Right a partir de la vitesse
-                R = (int)Math.Abs(Math.Round(vitesse * (R_Speed_Ratio / 100f)));
-                L = (int)Math.Abs(Math.Round(vitesse * (L_Speed_Ratio / 100f)));
+            //-------------------------------------------
+            // Calcule des valeurs Left et Right a partir de la vitesse
+            R = (int)Math.Abs(Math.Round(vitesse * (R_Speed_Ratio / 100f)));
+            L = (int)Math.Abs(Math.Round(vitesse * (L_Speed_Ratio / 100f)));
 
-                // Definition de la trame selon les valeurs obtenues
-                if (R_Speed_Ratio >= 0) RTrame = ValeursAvancer[R];
-                else RTrame = ValeursReculer[R];
+            // Definition de la trame selon les valeurs obtenues
+            if (R_Speed_Ratio >= 0) RTrame = ValeursAvancer[R];
+            else RTrame = ValeursReculer[R];
 
-                if (L_Speed_Ratio >= 0) LTrame = ValeursAvancer[Math.Abs(L)];
-                else LTrame = ValeursReculer[L];
-                // Envoi de la trame au rover
-                rover.Commander(new byte[] { LTrame, RTrame });
-                // Temporisation
-                Thread.Sleep(200);
-            };
-
-            roverTask.Wait();
-            roverTask.Dispose();
+            if (L_Speed_Ratio >= 0) LTrame = ValeursAvancer[Math.Abs(L)];
+            else LTrame = ValeursReculer[L];
+            // Envoi de la trame au rover
+            rover.Command = new byte[] { LTrame, RTrame };
         }
 
         //----------------------------------------------
@@ -133,6 +105,8 @@ namespace GestionnaireWifiBot.ViewModel
 
         private void MoteurReconnaissance_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
+            int L_Speed_Ratio = 0;
+            int R_Speed_Ratio = 0;
             Mot_Reconnu = e.Result.Text;    // Affichage du Mot dans la View
             switch (e.Result.Text)          // Change les valeur de 
             {
@@ -205,7 +179,8 @@ namespace GestionnaireWifiBot.ViewModel
                 default:
                     break;
             }
+            // Definition de la commande du rover
+            SendValues(L_Speed_Ratio, R_Speed_Ratio);
         }
-
     }
 }

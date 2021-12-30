@@ -116,9 +116,6 @@
                                   Template="{StaticResource MenuItem_Base}"/>
                 </Menu>
 
-                <Border>
-
-                </Border>
                 <Grid Grid.Row="2" VerticalAlignment="Center"
                             HorizontalAlignment="Center">
                     <Grid.ColumnDefinitions>

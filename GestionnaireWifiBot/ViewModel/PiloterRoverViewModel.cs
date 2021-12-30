@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using GestionnaireWifiBot.ViewModel;
-using GestionnaireWifiBot.User_Controls;
-using System.Windows;
-using GestionnaireWifiBot.Commands;
+﻿using GestionnaireWifiBot.Commands;
 using GestionnaireWifiBot.Model;
-using System.Windows.Input;
+using System.Windows;
+using System;
 
 namespace GestionnaireWifiBot.ViewModel
 {
     class  PiloterRoverViewModel : BaseViewModel
     {
-        public static Config rvConfig;
-        public static Rover rover;
-
         protected Byte[] ValeursAvancer = new Byte[41] {
             0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,
             0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,
@@ -31,12 +20,16 @@ namespace GestionnaireWifiBot.ViewModel
             0x9e,0x9f,0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,
             0xa8 };
 
+        public static Config rvConfig { get; set; }
+        public static Rover rover { get; set; }
+
         public PiloterRoverViewModel()
         {
             CloseWindowCommand = new BaseCommand(o => {
                 rover.Disconnect();
                 ((Window)o).Close();
             });
+            //rover.Connection(); <- Backend
         }
     }
 }

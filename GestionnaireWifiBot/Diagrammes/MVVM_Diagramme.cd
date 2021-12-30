@@ -1,21 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="GestionnaireWifiBot.Model.Config">
+    <Position X="3.5" Y="12.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Config.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="GestionnaireWifiBot.Model.ConfigsBackup">
-    <Position X="7.5" Y="6.5" Width="2.25" />
+    <Position X="0.5" Y="11.25" Width="2.75" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Config.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.Model.Rover">
-    <Position X="3.5" Y="4" Width="3" />
+    <Position X="6.5" Y="10.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAQAAABAAAAAAAEAIAAEABIAAAQAAAAAAAAAAAAAIAE=</HashCode>
+      <HashCode>AAQAAABAAAAAAAEAIAAEBBIAAAQAAAAACAQAAAAAAAE=</HashCode>
       <FileName>Model\Rover.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.User_Controls.Base.Joystick" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="21" Y="5.5" Width="1.5" />
+    <Position X="22" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAIAAAwAIAAAAQAAAACAAAAAAAAAIAAAAAAAAAAAQA=</HashCode>
       <FileName>User_Controls\Base\Joystick.xaml.cs</FileName>
@@ -23,7 +30,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.User_Controls.ControleBoutonView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="17.5" Y="5.5" Width="1.5" />
+    <Position X="20.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>User_Controls\ControleBoutonView.xaml.cs</FileName>
@@ -31,7 +38,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.User_Controls.ControleJoystickView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="19.25" Y="5.5" Width="1.5" />
+    <Position X="22" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>User_Controls\ControleJoystickView.xaml.cs</FileName>
@@ -39,7 +46,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.User_Controls.ControleVocaleView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="21" Y="4.5" Width="1.5" />
+    <Position X="18.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>User_Controls\ControleVocaleView.xaml.cs</FileName>
@@ -47,7 +54,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.View.AddConfigView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="19.25" Y="3.5" Width="1.5" />
+    <Position X="18.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAECAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\AddConfigView.xaml.cs</FileName>
@@ -55,7 +62,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.View.DelConfigView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="19.25" Y="4.5" Width="1.5" />
+    <Position X="20.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\DelConfigView.xaml.cs</FileName>
@@ -63,7 +70,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.View.PiloterRoverView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="21" Y="3.5" Width="1.5" />
+    <Position X="20.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAACCAAAAACAoAAAAAAAAAAEAAABAAAAAAAA=</HashCode>
       <FileName>View\PiloterRoverView.xaml.cs</FileName>
@@ -71,7 +78,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.View.SelConfigView" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="17.5" Y="4.5" Width="1.5" />
+    <Position X="22" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\SelConfigView.xaml.cs</FileName>
@@ -79,7 +86,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="17.5" Y="3.5" Width="1.5" />
+    <Position X="18.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>View\MainWindow.xaml.cs</FileName>
@@ -87,7 +94,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.BaseViewModel">
-    <Position X="11.5" Y="5.25" Width="3.5" />
+    <Position X="10.5" Y="0.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAQAAAACAAAAAAAAIAAAAAAAoAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModel\BaseViewModel.cs</FileName>
@@ -95,62 +102,77 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.ConfigRvViewModel">
-    <Position X="7.5" Y="8.75" Width="3.25" />
+    <Position X="5" Y="3.75" Width="4" />
     <TypeIdentifier>
       <HashCode>QAQAAAAEABCgAABAgAAAQAAgoAAAAAABBAQAAQQAAAE=</HashCode>
       <FileName>ViewModel\ConfigRvViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.ControleBoutonViewModel">
-    <Position X="11.5" Y="11.75" Width="3.25" />
+    <Position X="11.5" Y="7" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAiADAAAEAAEAAAAAAAAAAAAQCEBQAIAAAgiA=</HashCode>
+      <HashCode>AAAAEAAAiADAAAEAAAAAAAAAAAAAAAQCEBAAIAAAgiA=</HashCode>
       <FileName>ViewModel\ControleBoutonViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.ControleJoystickViewModel">
-    <Position X="15.5" Y="11.75" Width="2.5" />
+    <Position X="16" Y="7" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAARgAAAAYAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAYAA=</HashCode>
       <FileName>ViewModel\ControleJoystickViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.ControleVocaleViewModel">
-    <Position X="18.75" Y="11.75" Width="4" />
+    <Position X="19" Y="7" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAECBAQBAQAACAAEQAgAAAAAAAAAQAAAQAAAAAgkA=</HashCode>
+      <HashCode>AAAAECBAQBAQAACAAAQAgAAAAAAAAAQAAAQAAAAAAEA=</HashCode>
       <FileName>ViewModel\ControleVocaleViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.HomeViewModel">
-    <Position X="3.5" Y="8.75" Width="3.25" />
+    <Position X="0.5" Y="3.75" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AgAIAAAAAgAAAAJgBEECAAAEQQAIAAAQAAAEAAIAAgQ=</HashCode>
       <FileName>ViewModel\HomeViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GestionnaireWifiBot.ViewModel.PiloterRoverViewModel">
-    <Position X="15.75" Y="8.75" Width="2.75" />
+    <Position X="16" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAAAACAAAAAAgAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>ViewModel\PiloterRoverViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="System.Net.Sockets.NetworkStream" Collapsed="true">
-    <Position X="3.75" Y="2" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
   <Class Name="System.Net.Sockets.TcpClient" Collapsed="true">
-    <Position X="5.5" Y="2.25" Width="1.5" />
+    <Position X="10.75" Y="12.5" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="GestionnaireWifiBot.Model.Config">
-    <Position X="7.5" Y="4.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAgAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\Config.cs</FileName>
-    </TypeIdentifier>
+  <Class Name="System.Net.Sockets.NetworkStream" Collapsed="true">
+    <Position X="10.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Threading.Tasks.Task" Collapsed="true">
+    <Position X="9.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Speech.Recognition.GrammarBuilder" Collapsed="true">
+    <Position X="16.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Speech.Recognition.SpeechRecognitionEngine" Collapsed="true">
+    <Position X="16.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Speech.Recognition.Grammar" Collapsed="true">
+    <Position X="16.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Speech.Recognition.Choices" Collapsed="true">
+    <Position X="16.5" Y="14" Width="1.5" />
+    <TypeIdentifier />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

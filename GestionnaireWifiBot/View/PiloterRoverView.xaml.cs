@@ -55,11 +55,6 @@ namespace GestionnaireWifiBot.View
                 controleBoutonViewModel = new ControleBoutonViewModel();
                 controleJoystickViewModel = new ControleJoystickViewModel();
                 controleVocaleViewModel = new ControleVocaleViewModel();
-
-                ControleBoutonViewModel.CommandLoopActivated = true;
-                ControleJoystickViewModel.CommandLoopActivated = false;
-                ControleVocaleViewModel.CommandLoopActivated = false;
-
                 DataContext = controleBoutonViewModel;
             }
         }
@@ -74,10 +69,8 @@ namespace GestionnaireWifiBot.View
         {
             if (DataContext != controleBoutonViewModel)
             {
-                ControleBoutonViewModel.CommandLoopActivated = true;
-                ControleJoystickViewModel.CommandLoopActivated = false;
-                ControleVocaleViewModel.CommandLoopActivated = false;
                 DataContext = controleBoutonViewModel;
+                rover.Command = new byte[] { 0xc0, 0xc0 }; // reset
             }
         }
 
@@ -85,21 +78,18 @@ namespace GestionnaireWifiBot.View
         {
             if (DataContext != controleJoystickViewModel)
             {
-                ControleBoutonViewModel.CommandLoopActivated = false;
-                ControleJoystickViewModel.CommandLoopActivated = true;
-                ControleVocaleViewModel.CommandLoopActivated = false;
                 DataContext = controleJoystickViewModel;
+                rover.Command = new byte[] { 0xc0, 0xc0 }; // reset
             }
+
         }
 
         private void Menu_Item_GOTO_VocaleMode(object sender, RoutedEventArgs e)
         {
             if (DataContext != controleVocaleViewModel)
             {
-                ControleBoutonViewModel.CommandLoopActivated = false;
-                ControleJoystickViewModel.CommandLoopActivated = false;
-                ControleVocaleViewModel.CommandLoopActivated = true;
                 DataContext = controleVocaleViewModel;
+                rover.Command = new byte[] { 0xc0, 0xc0 }; // reset
             }
         }
     }
