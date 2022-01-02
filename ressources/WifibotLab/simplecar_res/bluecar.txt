@@ -1,5 +1,0 @@
-3D Model By Steve K
-
-This 3d model (and related texture data) can be freely distributed, but it may not be sold or compiled into a commercial/retail product without permission from the author.
-
-The author autorizes 3Impact.com to include and distribute this model (or models derived from it) to the commercial version of 3Impact Game Engine installation file.
