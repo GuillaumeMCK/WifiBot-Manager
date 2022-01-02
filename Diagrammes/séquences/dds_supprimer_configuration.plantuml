@@ -1,0 +1,69 @@
+@startuml
+!theme reddress-lightblue
+
+actor Utilisateur as Utilisateur
+participant IHM_Principale as "IHM : Principale"
+participant IHM_DelConfig as "IHM : Supprimer une configuration"
+participant DIALOG_DelConfig as "Dialog : Confirmation"
+
+autonumber 1
+Utilisateur -> IHM_Principale ++ : Lancement l'application
+IHM_Principale -> IHM_Principale : Récupération des \nconfigurations sauvegardées
+IHM_Principale [#1A5FB6]--> Utilisateur : Affichage de l'IHM principale
+
+Utilisateur -> IHM_Principale : Clique sur le bouton \n<Gérer les rovers>
+IHM_Principale [#1A5FB6]--> Utilisateur : Affichage du sous menu
+Utilisateur -> IHM_Principale : Clique sur le bouton \n<Supprimer une configuration>
+
+alt La liste contiend au moins un element
+   IHM_Principale [#1A5FB6]->  IHM_DelConfig ++: Lancement de l'IHM\n"Supprimer une configuration" 
+   IHM_Principale <--[#1A5FB6] IHM_DelConfig : Récuperation de la liste \ndes configurations
+   IHM_DelConfig [#1A5FB6]--> Utilisateur : Affichage de l'IHM \n"Sélectionner un rover"
+   
+   alt Une configuration a été sélectionnée
+      Utilisateur -> IHM_DelConfig : Sélectionne une configuration \ndans la liste
+
+      alt Bouton <supprimer> cliquée
+         Utilisateur ->IHM_DelConfig : Clique sur le bouton <Supprimer>
+         IHM_DelConfig [#1A5FB6]-> DIALOG_DelConfig ++ : Ouverture du message\nConfirmer la suppression
+         IHM_DelConfig [#1A5FB6]--> Utilisateur  : Affichage du message\n "Confirmer la suppression."
+
+            alt Configuration supprimée
+                Utilisateur ->DIALOG_DelConfig : Clique sur le bouton <oui>
+                DIALOG_DelConfig [#1A5FB6]--> Utilisateur : Fermeture du dialog : Confirmation"
+                IHM_DelConfig [#green]->IHM_DelConfig : Suppression de la \nconfiguration
+            else Configuration non supprimée
+                Utilisateur ->DIALOG_DelConfig : Clique sur le bouton <non||exit>
+                DIALOG_DelConfig [#1A5FB6]--> Utilisateur --: Fermeture du dialog : Confirmation"
+                IHM_DelConfig [#orange]-x IHM_DelConfig : Ne rien faire
+            end
+      else Bouton <annuler> cliquée
+         Utilisateur ->IHM_DelConfig : Clique sur le bouton <Annuler>
+         IHM_DelConfig [#1A5FB6]--> Utilisateur : Fermeture de l'IHM\n "Supprimer une configuration"
+         IHM_Principale [#orange]-x IHM_DelConfig : Ne rien faire
+       else Bouton <exit> cliquée
+         Utilisateur ->IHM_DelConfig : Clique sur le bouton <Exite>
+         IHM_DelConfig [#1A5FB6]--> Utilisateur : Fermeture de l'IHM\n "Supprimer une configuration"
+         IHM_Principale [#green]-> IHM_DelConfig : Récuperation de la liste des \nconfigurations modifiée
+      end
+   else Aucune configuration n'est selectionnée
+
+      alt La configuration est validée
+         Utilisateur ->IHM_DelConfig : Clique sur le bouton <Valider>
+         IHM_DelConfig [#red]-->Utilisateur : Afficher : Opération\nimpossible aucune configuration \nn'est sélectionné
+
+      else Bouton <annuler> cliquée
+         Utilisateur ->IHM_DelConfig : Clique sur le bouton <Annuler>
+         IHM_DelConfig [#1A5FB6]--> Utilisateur : Fermeture de l'IHM\n "Supprimer une configuration"
+         IHM_Principale [#orange]-x IHM_DelConfig : Ne rien faire
+      else Bouton <exit> cliquée
+         Utilisateur ->IHM_DelConfig : Clique sur le bouton <Exite>
+         IHM_DelConfig [#1A5FB6]--> Utilisateur --: Fermeture de l'IHM\n "Supprimer une configuration"
+         IHM_Principale [#green]-> IHM_DelConfig : Récuperation de la liste des \nconfigurations modifiée
+      end
+      
+   end
+else La liste est vide
+      IHM_Principale [#red]-->Utilisateur --: Afficher : Opération\nimpossible la liste des\n configuration est vide
+end
+@enduml

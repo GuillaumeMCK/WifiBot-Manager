@@ -1,0 +1,8 @@
+; dlltool --base-file D:\DOCUME~1\FAMILI~1\LOCALS~1\Temp/cca02148.base --output-exp 3impactd.exp --dllname 3impactd.dll --output-def lib3impactd.def --exclude-symbol=DllMainCRTStartup@12 --def D:\DOCUME~1\FAMILI~1\LOCALS~1\Temp/cca02148.def --output-lib lib3impactd.a
+EXPORTS
+	Init @ 1 ; 
+	LibInit @ 2 ; 
+	PostExit @ 3 ; 
+	PreInit @ 4 ; 
+	Run @ 5 ; 
+	Exit @ 6 ; 

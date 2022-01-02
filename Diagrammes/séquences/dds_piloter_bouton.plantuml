@@ -1,0 +1,43 @@
+@startuml
+!theme reddress-lightblue
+
+actor Utilisateur as Utilisateur
+participant IHM_Principale as "IHM : Principale"
+participant IHM_Piloter as "IHM : Piloter Rover"
+
+autonumber 1
+Utilisateur -> IHM_Principale ++ : Lancement l'application
+IHM_Principale -> IHM_Principale : Récupération des \nconfigurations sauvegardées
+IHM_Principale [#1A5FB6]--> Utilisateur : Affichage de l'IHM principale
+
+
+alt Un rover a été sélectionnée
+   ref over Utilisateur, IHM_Principale : Selectionner un rover
+   Utilisateur -> IHM_Principale : Clique sur le bouton \n<Piloter le rover>
+
+   IHM_Principale [#1A5FB6]->  IHM_Piloter ++ : Lancement de l'IHM\n"Piloter un rover" 
+   IHM_Principale <--[#1A5FB6] IHM_Piloter : Récuperation du \nrover sélectionnée
+   IHM_Piloter [#1A5FB6]-> Rover ++ : Requete :\nTentative de connexion
+
+   alt Connexion au rover établie
+      Rover [#green]--> IHM_Piloter : Reponse :\nConnexion établie
+      IHM_Piloter [#1A5FB6]--> Utilisateur : Affichage de l'IHM \n"Piloter un rover"
+
+      Utilisateur --> IHM_Piloter : Pilotage du rover. \n<Croix directionnel + slide>
+      IHM_Piloter --> Rover : Requete : Envoi de la commande
+      Utilisateur --> IHM_Piloter : Clique sur le button <exite>
+
+      IHM_Piloter --> Rover : requete : Deconnexion
+
+      IHM_Piloter [#1A5FB6]--> Utilisateur : Fermeture de l'IHM\n"Piloter le rover"
+
+   else Erreur de connexion
+      Rover [#red]--> IHM_Piloter -- : Reponse :\nEchec de connexion
+      IHM_Piloter [#red]--> Utilisateur : Afficher : La connexion au rover\na échoué.
+      IHM_Piloter [#1A5FB6]--> Utilisateur -- : Fermeture de l'IHM\n"Piloter le rover"
+   end
+
+else Aucun rover selectionnée
+   IHM_Principale [#red]--> Utilisateur : Affichage : Opération impossible\naucun rover n'a été selectionnée
+end
+@enduml

@@ -119,7 +119,8 @@
             <Grid HorizontalAlignment="Stretch"
                   Margin="10,3">
                 <Button HorizontalAlignment="Right" Style="{StaticResource Base}"
-                    Command="{Binding AddConfigCommand}">
+                        Command="{Binding AddConfigCommand}"
+                        CommandParameter="{Binding ElementName=Window_Ajouter_Config}">
                     <WrapPanel>
                         <TextBlock VerticalAlignment="Center" Text="Ajouter"/>
                     </WrapPanel>

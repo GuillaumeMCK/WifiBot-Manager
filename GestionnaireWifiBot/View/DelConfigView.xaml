@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GestionnaireWifiBot.View"
         mc:Ignorable="d"
-        Title="DelConfig"
+        Title="Supprimer une configuration"
         Height="300" Width="300"
         MinHeight="180" MinWidth="300"
         Background="#fff"

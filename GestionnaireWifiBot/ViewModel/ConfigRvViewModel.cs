@@ -84,9 +84,9 @@ namespace GestionnaireWifiBot.ViewModel
             rvConfig = new Config(); 
             operation_canceled = false;
 
-            AddConfigCommand       = new BaseCommand(o => AddConfig());
+            AddConfigCommand       = new BaseCommand(o => AddConfig(o));
             DeleteConfigCommand    = new BaseCommand(o => DeleteConfig());
-            SetSelectConfigCommand = new BaseCommand(o => SetCurrentRvConfig());
+            SetSelectConfigCommand = new BaseCommand(o => SetCurrentRvConfig(o));
             CancelCommand          = new BaseCommand(o => { operation_canceled = true; ((Window)o).Close();});
         }
 
@@ -103,12 +103,13 @@ namespace GestionnaireWifiBot.ViewModel
             }
         }
 
-        private void SetCurrentRvConfig()
+        private void SetCurrentRvConfig(object o)
         {
             if (RvConfigSelectionne != null)
             {
                 rvConfig = RvConfigSelectionne;
                 operation_canceled = false;
+                ((Window)o).Close();
             }
             else
             {
@@ -120,7 +121,7 @@ namespace GestionnaireWifiBot.ViewModel
             }
         }
 
-        private void AddConfig()
+        private void AddConfig(object o)
         {
             if (!ListeRvConfig.Any(item => item.NomDuRover == rvConfig_Nom &&
                                            item.AdresseIP == rvConfig_IP &&
@@ -128,6 +129,7 @@ namespace GestionnaireWifiBot.ViewModel
             {
                 ListeRvConfig.Add(new Config() { NomDuRover = rvConfig_Nom, AdresseIP = rvConfig_IP, PortTCP=rvConfig_Port });
                 operation_canceled = false;
+                ((Window)o).Close();
             }
             else
             {
@@ -135,6 +137,7 @@ namespace GestionnaireWifiBot.ViewModel
                                 "Opération impossible !",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
+                operation_canceled = true;
             }
         }
     }
