@@ -6,6 +6,7 @@ participant IHM_Principale as "IHM : Principale"
 participant IHM_SelectConfig as "IHM : Sélectionner un rover"
 
 autonumber 1
+Utilisateur ++
 Utilisateur -> IHM_Principale ++ : Lancement de l'application
 IHM_Principale -> IHM_Principale : Récupération des \nconfigurations sauvegardées
 IHM_Principale [#1A5FB6]--> Utilisateur : Affichage de l'IHM principale
@@ -22,12 +23,13 @@ alt La liste contiend au moins un element
       alt La sélection est validée
          Utilisateur ->IHM_SelectConfig : Clique sur le bouton <Valider>
          IHM_SelectConfig [#1A5FB6]--> Utilisateur  : Fermeture de l'IHM\n "Sélectionner un rover"
+         IHM_SelectConfig -> IHM_SelectConfig : Close
          IHM_Principale [#green]-> IHM_SelectConfig : Récuperation de la \nconfiguration sélectionnée
       
       else La sélection est annulée ou avortée
          Utilisateur ->IHM_SelectConfig : Clique sur le bouton <Annulé||Exit>
+         IHM_SelectConfig -> IHM_SelectConfig : Close
          IHM_SelectConfig [#1A5FB6]--> Utilisateur : Fermeture de l'IHM\n "Sélectionner un rover"
-         IHM_Principale [#orange]-x IHM_SelectConfig : Ne rien faire
       end
    else Aucune configuration n'est selectionnée
 
@@ -37,13 +39,12 @@ alt La liste contiend au moins un element
 
       else La sélection est annulée ou avortée
          Utilisateur ->IHM_SelectConfig : Clique sur le bouton <Annulé||Exit>
+         IHM_SelectConfig -> IHM_SelectConfig : Close
          IHM_SelectConfig [#1A5FB6]--> Utilisateur -- : Fermeture de l'IHM\n "Sélectionner un rover"
-         IHM_Principale [#orange]-x IHM_SelectConfig : Ne rien faire
       end
       
    end
 else La liste est vide
       IHM_Principale [#red]-->Utilisateur --: Afficher : Opération\nimpossible la liste est vide
 end
-
 @enduml

@@ -1,15 +1,28 @@
 
-valeur = range(0,41)
+"""
+                               ┌───┬───┬───┬───┬───┬───┬───┬───┐
+                          Bit >│ 7 │ 6 │ 5 │ 4 │ 3 │ 2 │ 1 │ 0 │ 
+                      ┌────────┼───┼───┼───┼───┼───┼───┼───┼───┤
+                      │ GAUCHE │ 1 │   │   │   │   │   │   │   │
+                      ├────────┼───┼───┼───┼───┼───┼───┼───┼───┤
+                      │ DROITE │ 1 │   │   │   │   │   │   │   │
+                      └────────┴─┬─┴─┬─┴┬──┴───┴───┴───┴───┴──┬┘
+                                 │   │  └───────────────┬─────┘ 
+                                 V   │                  │
+       1 : Controle de vitesse ON    │                  V
+       0 : Controle de vitesse OFF   │     0-60 sans contrôle de vitesse
+                                     V     0-40 avec contrôle de vitesse
+                              0 : Avant 
+                              1 : Arriere
+"""
 
-print("-- Valeurs pour avancer -- ")
-for v in valeur:
-    binary_value = bin(192+v)
-    hex_value = hex(192+v)
-    print(f"{v},{binary_value},{hex_value}")
+def GetValues() -> None:
+    vitesse_range = range(41)
+    print("── Valeurs pour avancer ──┬── Valeurs pour reculer ──")
+    for v in vitesse_range:
+        print(f"{v} : {bin(192+v)},{hex(192+v)}", end='')
+        print(f"\t  │\t", end='')
+        print(f"{v} : {bin(128+v)},{hex(128+v)}")
 
-print("-- Valeurs pour reculer -- ")
-for v in valeur:
-    binary_value = bin(128+v)
-    hex_value = hex(128+v)
-    print(f"{v},{binary_value},{hex_value}")
-
+if __name__ == "__main__":
+    GetValues()
