@@ -37,7 +37,7 @@ namespace GestionnaireWifiBot.View
         public PiloterRoverView()
         {
             InitializeComponent();
-            
+            ControleVocaleViewModel.isShown = false;
             config = HomeViewModel.currentRvConfig;
             rover = new Rover(config.AdresseIP, config.PortTCP);
             rover.Connection();
@@ -67,6 +67,7 @@ namespace GestionnaireWifiBot.View
 
         private void Menu_Item_GOTO_ButtonMode(object sender, RoutedEventArgs e)
         {
+            ControleVocaleViewModel.isShown = false;
             if (DataContext != controleBoutonViewModel)
             {
                 DataContext = controleBoutonViewModel;
@@ -76,6 +77,7 @@ namespace GestionnaireWifiBot.View
 
         private void Menu_Item_GOTO_JoystickMode(object sender, RoutedEventArgs e)
         {
+            ControleVocaleViewModel.isShown = false;
             if (DataContext != controleJoystickViewModel)
             {
                 DataContext = controleJoystickViewModel;
@@ -86,6 +88,7 @@ namespace GestionnaireWifiBot.View
 
         private void Menu_Item_GOTO_VocaleMode(object sender, RoutedEventArgs e)
         {
+            ControleVocaleViewModel.isShown = true;
             if (DataContext != controleVocaleViewModel)
             {
                 DataContext = controleVocaleViewModel;

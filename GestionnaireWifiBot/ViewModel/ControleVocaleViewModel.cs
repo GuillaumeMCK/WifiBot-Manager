@@ -11,6 +11,7 @@ namespace GestionnaireWifiBot.ViewModel
         int vitesse = 0;           // Definit la vitesse du rover (0 - 40)
         int selectedItemIndex = 0; // Index de l'element selectionné par défaut
         string mot_reconnu;        // permet de stocker le mot reconnu
+        public static bool isShown = false;
         SpeechRecognitionEngine MoteurReconnaissance; 
         Choices MouvementChoisie;
         GrammarBuilder ContraintesReconnaissance;
@@ -49,7 +50,7 @@ namespace GestionnaireWifiBot.ViewModel
             );
             // On implante le dictionnaire dans le moteur de reconnaissance en utilisant un GrammarBuilder
             ContraintesReconnaissance = new GrammarBuilder(MouvementChoisie);
-            ContraintesReconnaissance.Culture = new System.Globalization.CultureInfo("fr-FR");
+            //ContraintesReconnaissance.Culture = new System.Globalization.CultureInfo("fr-FR");
 
             // On instancie une nouvelle grammaire avec celle précédemment construite
             MotsAReconnaitre = new Grammar(ContraintesReconnaissance);
@@ -107,80 +108,86 @@ namespace GestionnaireWifiBot.ViewModel
         {
             int L_Speed_Ratio = 0;
             int R_Speed_Ratio = 0;
-            Mot_Reconnu = e.Result.Text;    // Affichage du Mot dans la View
-            switch (e.Result.Text)          // Change les valeur de 
+            if (isShown)
             {
-                case "Arrêt":
-                    ActionVocaleIndexListe = 0;
-                    vitesse = 0;
-                    L_Speed_Ratio = 0;
-                    R_Speed_Ratio = 0;
-                    break;
-                case "Avancer normalement":
-                    ActionVocaleIndexListe = 1;
-                    vitesse = 20;
-                    L_Speed_Ratio = 100;
-                    R_Speed_Ratio = 100;
-                    break;
-                case "Avancer doucement":
-                    ActionVocaleIndexListe = 2;
-                    vitesse = 10;
-                    L_Speed_Ratio = 100;
-                    R_Speed_Ratio = 100;
-                    break;
-                case "Avancer à droite":
-                    ActionVocaleIndexListe = 3;
-                    vitesse = 30;
-                    L_Speed_Ratio = 100;
-                    R_Speed_Ratio = 75;
-                    break;
-                case "Avancer à gauche":
-                    ActionVocaleIndexListe = 4;
-                    vitesse = 30;
-                    L_Speed_Ratio = 75;
-                    R_Speed_Ratio = 100;
-                    break;
-                case "Rotation à gauche":
-                    ActionVocaleIndexListe = 5;
-                    vitesse = 20;
-                    L_Speed_Ratio = -50;
-                    R_Speed_Ratio = 50;
-                    break;
-                case "Rotation à droite":
-                    ActionVocaleIndexListe = 6;
-                    vitesse = 20;
-                    L_Speed_Ratio = 50;
-                    R_Speed_Ratio = -50;
-                    break;
-                case "Reculer normalement":
-                    ActionVocaleIndexListe = 7;
-                    vitesse = 20;
-                    L_Speed_Ratio = -100;
-                    R_Speed_Ratio = -100;
-                    break;
-                case "Reculer doucement":
-                    ActionVocaleIndexListe = 8;
-                    vitesse = 10;
-                    L_Speed_Ratio = -100;
-                    R_Speed_Ratio = -100;
-                    break;
-                case "Reculer à droite":
-                    ActionVocaleIndexListe = 9;
-                    vitesse = 30;
-                    L_Speed_Ratio = -100;
-                    R_Speed_Ratio = -75;
-                    break;
-                case "Reculer à gauche":
-                    ActionVocaleIndexListe = 10;
-                    vitesse = 30;
-                    L_Speed_Ratio = -75;
-                    R_Speed_Ratio = -100;
-                    break;
-                default:
-                    break;
+                Mot_Reconnu = e.Result.Text;    // Affichage du Mot dans la View
+                switch (e.Result.Text)          // Change les valeur de 
+                {
+                    case "Arrêt":
+                        ActionVocaleIndexListe = 0;
+                        vitesse = 0;
+                        L_Speed_Ratio = 0;
+                        R_Speed_Ratio = 0;
+                        break;
+                    case "Avancer normalement":
+                        ActionVocaleIndexListe = 1;
+                        vitesse = 20;
+                        L_Speed_Ratio = 100;
+                        R_Speed_Ratio = 100;
+                        break;
+                    case "Avancer doucement":
+                        ActionVocaleIndexListe = 2;
+                        vitesse = 10;
+                        L_Speed_Ratio = 100;
+                        R_Speed_Ratio = 100;
+                        break;
+                    case "Avancer à droite":
+                        ActionVocaleIndexListe = 3;
+                        vitesse = 30;
+                        L_Speed_Ratio = 100;
+                        R_Speed_Ratio = 75;
+                        break;
+                    case "Avancer à gauche":
+                        ActionVocaleIndexListe = 4;
+                        vitesse = 30;
+                        L_Speed_Ratio = 75;
+                        R_Speed_Ratio = 100;
+                        break;
+                    case "Rotation à gauche":
+                        ActionVocaleIndexListe = 5;
+                        vitesse = 20;
+                        L_Speed_Ratio = -50;
+                        R_Speed_Ratio = 50;
+                        break;
+                    case "Rotation à droite":
+                        ActionVocaleIndexListe = 6;
+                        vitesse = 20;
+                        L_Speed_Ratio = 50;
+                        R_Speed_Ratio = -50;
+                        break;
+                    case "Reculer normalement":
+                        ActionVocaleIndexListe = 7;
+                        vitesse = 20;
+                        L_Speed_Ratio = -100;
+                        R_Speed_Ratio = -100;
+                        break;
+                    case "Reculer doucement":
+                        ActionVocaleIndexListe = 8;
+                        vitesse = 10;
+                        L_Speed_Ratio = -100;
+                        R_Speed_Ratio = -100;
+                        break;
+                    case "Reculer à droite":
+                        ActionVocaleIndexListe = 9;
+                        vitesse = 30;
+                        L_Speed_Ratio = -100;
+                        R_Speed_Ratio = -75;
+                        break;
+                    case "Reculer à gauche":
+                        ActionVocaleIndexListe = 10;
+                        vitesse = 30;
+                        L_Speed_Ratio = -75;
+                        R_Speed_Ratio = -100;
+                        break;
+                    default:
+                        break;
+                }
+                // Definition de la commande du rover
+                SendValues(L_Speed_Ratio, R_Speed_Ratio);
             }
-            // Definition de la commande du rover
-            SendValues(L_Speed_Ratio, R_Speed_Ratio);
+            else
+                System.Threading.Thread.Sleep(1000);
+
         }
     }
 }
