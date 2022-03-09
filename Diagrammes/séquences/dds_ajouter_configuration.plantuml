@@ -1,0 +1,44 @@
+@startuml
+!theme reddress-lightblue
+
+actor Utilisateur as Utilisateur
+participant IHM_Principale as "IHM : Principale"
+participant IHM_AddConfig as "IHM : Ajouter une configuration"
+
+autonumber 1
+Utilisateur++
+Utilisateur -> IHM_Principale ++ : Lancement l'application
+IHM_Principale -> IHM_Principale : Récupération des \nconfigurations sauvegardées
+IHM_Principale [#1A5FB6]--> Utilisateur : Affichage de l'IHM principale
+
+Utilisateur -> IHM_Principale : Clique sur le bouton \n<Gérer les rovers>
+IHM_Principale [#1A5FB6]--> Utilisateur : Affichage du sous menu
+Utilisateur -> IHM_Principale : Clique sur le bouton \n<Ajouter une configuration>
+
+IHM_Principale [#1A5FB6]->  IHM_AddConfig ++ : Ouverture de l'IHM\n "Ajouter une configuration" 
+IHM_Principale <--[#1A5FB6] IHM_AddConfig : Récuperation de la liste \ndes configurations
+IHM_AddConfig [#1A5FB6]--> Utilisateur : Affichage de l'IHM \n"Ajouter une configuration"
+Utilisateur -> IHM_AddConfig : Remplissage du formulaire
+
+par Ajout d'une configuration
+    alt Le formulaire est conformément rempli
+        alt La configuration n'existe pas encore
+            Utilisateur ->IHM_AddConfig : Clique sur le bouton <Ajouter>
+            IHM_AddConfig [#1A5FB6]--> Utilisateur : Fermeture de l'IHM\n "Ajouter une configuration"
+            IHM_Principale [#green]-> IHM_AddConfig : Ajout de la nouvelle \nconfiguration
+
+        else La configuration existe deja
+            Utilisateur ->IHM_AddConfig : Clique sur le bouton <Ajouter>
+            IHM_AddConfig [#red]-->Utilisateur : Afficher : Opération\nimpossible la configuration \nexiste deja
+        end
+
+    else Le formulaire est invalide
+        IHM_AddConfig -> IHM_AddConfig : Reset du ou des champs
+    end
+
+else Ajout annulé ou avorté
+    Utilisateur ->IHM_DelConfig : Clique sur le bouton <Exite> ou <Annulé>
+    IHM_DelConfig -> IHM_DelConfig : Close
+    IHM_AddConfig [#1A5FB6]--> Utilisateur --: Fermeture de l'IHM\n "Ajouter une configuration"
+end
+@enduml
