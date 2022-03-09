@@ -1,0 +1,50 @@
+@startuml
+!theme reddress-lightblue
+
+actor Utilisateur as Utilisateur
+participant IHM_Principale as "IHM : Principale"
+participant IHM_SelectConfig as "IHM : Sélectionner un rover"
+
+autonumber 1
+Utilisateur ++
+Utilisateur -> IHM_Principale ++ : Lancement de l'application
+IHM_Principale -> IHM_Principale : Récupération des \nconfigurations sauvegardées
+IHM_Principale [#1A5FB6]--> Utilisateur : Affichage de l'IHM principale
+Utilisateur -> IHM_Principale : Clique sur le bouton \n<Selectionner un rover>
+
+alt La liste contiend au moins un element
+   IHM_Principale [#1A5FB6]-->  IHM_SelectConfig ++ : Lancement de l'IHM\n"Sélectionner un rover" 
+   IHM_Principale <--[#1A5FB6] IHM_SelectConfig : Récuperation de la liste \ndes configurations
+   IHM_SelectConfig [#1A5FB6]--> Utilisateur : Affichage de l'IHM \n"Sélectionner un rover
+
+   alt Une configuration a été sélectionnée
+      Utilisateur -> IHM_SelectConfig : Sélectionne une configuration \ndans la liste
+      IHM_SelectConfig -> IHM_SelectConfig : Définition de la configuration\nsélectionnée
+      alt La sélection est validée
+         Utilisateur ->IHM_SelectConfig : Clique sur le bouton <Valider>
+         IHM_SelectConfig [#1A5FB6]--> Utilisateur  : Fermeture de l'IHM\n "Sélectionner un rover"
+         IHM_SelectConfig -> IHM_SelectConfig : Close
+         IHM_Principale [#green]-> IHM_SelectConfig : Récuperation de la \nconfiguration sélectionnée
+      
+      else La sélection est annulée ou avortée
+         Utilisateur ->IHM_SelectConfig : Clique sur le bouton <Annulé||Exit>
+         IHM_SelectConfig -> IHM_SelectConfig : Close
+         IHM_SelectConfig [#1A5FB6]--> Utilisateur : Fermeture de l'IHM\n "Sélectionner un rover"
+      end
+   else Aucune configuration n'est selectionnée
+
+      alt La sélection est validée
+         Utilisateur ->IHM_SelectConfig : Clique sur le bouton <Valider>
+         IHM_SelectConfig [#red]-->Utilisateur : Afficher : Opération\nimpossible aucune configuration \nn'est sélectionné
+
+      else La sélection est annulée ou avortée
+         Utilisateur ->IHM_SelectConfig : Clique sur le bouton <Annulé||Exit>
+         IHM_SelectConfig -> IHM_SelectConfig : Close
+         IHM_SelectConfig [#1A5FB6]--> Utilisateur -- : Fermeture de l'IHM\n "Sélectionner un rover"
+      end
+      
+   end
+else La liste est vide
+      IHM_Principale [#red]-->Utilisateur --: Afficher : Opération\nimpossible la liste est vide
+end
+@enduml

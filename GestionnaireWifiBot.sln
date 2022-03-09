@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionnaireWifiBot", "GestionnaireWifiBot\GestionnaireWifiBot.csproj", "{3D4F15B4-3266-42D6-8870-5E8BF2F79AB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D4F15B4-3266-42D6-8870-5E8BF2F79AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4F15B4-3266-42D6-8870-5E8BF2F79AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4F15B4-3266-42D6-8870-5E8BF2F79AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4F15B4-3266-42D6-8870-5E8BF2F79AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63627990-96C8-4261-98D7-5A5FB32D0769}
+	EndGlobalSection
+EndGlobal

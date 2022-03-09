@@ -1,0 +1,33 @@
+@startuml
+!theme reddress-lightblue
+
+Title Diagramme de séquence du cas nominal de la classe Rover\n
+Participant Programme as "Programme" 
+Box Classe Rover #lightblue
+Participant Rover as "Rover : rover"
+Participant RoverTask as "Task : roverTask"
+End Box
+Participant Rover_P as "Rover physique"
+Programme ++
+Rover_P ++
+
+Programme -> Rover : Creation d'un objet Rover
+Programme -> Rover ++: rover.connexion()
+Rover -> Rover_P : requete : connexion
+Rover <-- Rover_P : reponse : ok
+Rover -> Rover : ConnectionState = true
+
+Rover ->> RoverTask ++: Creation de la tâche
+loop while (connected == true)
+    RoverTask -> Rover_P : SendCommand(command)
+    RoverTask -> RoverTask : Thread.Sleep(200)
+end
+RoverTask--
+
+Programme -> Rover : rover.Command = new byte{0xXX, 0xXX}
+Rover -> Rover : command = new byte{0xXX, 0xXX}
+Programme -> Rover : rover.Disconnect()
+Rover -> Rover : ConnectionState = fasle
+Rover -> Rover_P : requete : deconnexion
+
+@enduml
